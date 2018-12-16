@@ -9,17 +9,28 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeUtama">
+
+        <!-- Bagian splashscreen -->
         <activity
             android:name=".Splashscreen"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeSplash">
+            android:theme="@style/ThemeUtama">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mainmenu"></activity>
+
+        <!-- Bagian menu utama -->
+        <activity
+            android:name=".Mainmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"/>
+
+        <!-- Bagian detail dari hasil pencarian -->
+        <activity android:name=".DetailContent"/>
     </application>
 
 </manifest>
