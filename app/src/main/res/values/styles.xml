@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="ThemeUtama" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+    </style>
+
+    <!-- Splashscreen custom theme -->
+    <style name="ThemeSplash" parent="ThemeUtama">
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+</resources>
