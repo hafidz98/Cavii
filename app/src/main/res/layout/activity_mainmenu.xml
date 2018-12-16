@@ -28,7 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rectangle_border"
-                android:queryHint="Cari konveksi disini"></SearchView>
+                android:queryHint="Cari konveksi disini"
+                android:iconifiedByDefault="false"></SearchView>
         </LinearLayout>
 
         <LinearLayout
@@ -37,6 +38,11 @@
             android:layout_weight="1"
             android:padding="5dp">
 
+            <!--<Spinner
+                android:id="@+id/jenis_filter"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle_border"></Spinner> -->
             <Spinner
                 android:id="@+id/jenis_filter"
                 android:layout_width="match_parent"
@@ -65,6 +71,7 @@
             android:paddingStart="5dp">
 
             <Button
+                android:id="@+id/tombolcari"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#00A2E9"
