@@ -52,6 +52,7 @@ public class Mainmenu extends AppCompatActivity {
         final Spinner filterJenis = findViewById(R.id.jenis_filter);
 
         String[] jenisItem = new String[]{
+                "Pilih jenis baju",
                 "Kaos oblong",
                 "Kaos berkerah",
                 "Kemeja lengan pendek"
@@ -82,6 +83,7 @@ public class Mainmenu extends AppCompatActivity {
         final Spinner filterBahan = findViewById(R.id.bahan_filter);
 
         String[] jenisBahan = new String[]{
+                "Pilih bahan baju",
                 "Katun",
                 "Sintetis",
                 "Sutra"
