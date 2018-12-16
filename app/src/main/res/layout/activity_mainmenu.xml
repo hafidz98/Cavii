@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundColor"
     tools:context=".Mainmenu">
 
     <!-- NOTE: baru tampilan doang, pas di klik belom apa2 :v -->
@@ -27,37 +27,34 @@
                 android:id="@+id/search_engine"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/backgroundColorWhite"
-                android:queryHint="Cari konveksi disini"
-                android:iconifiedByDefault="false"/>
+                android:background="@drawable/rectangle_border"
+                android:queryHint="Cari konveksi disini"></SearchView>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/backgroundColorWhite"
             android:padding="5dp">
 
             <Spinner
                 android:id="@+id/jenis_filter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
+                android:background="@drawable/rectangle_border"></Spinner>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/backgroundColorWhite"
             android:padding="5dp">
 
             <Spinner
                 android:id="@+id/bahan_filter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
+                android:background="@drawable/rectangle_border"></Spinner>
         </LinearLayout>
 
         <LinearLayout
@@ -70,8 +67,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:text="@string/btnSearchText"
+                android:background="#00A2E9"
+                android:text="CARI"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -89,7 +86,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -102,8 +98,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#2ad11a"
-                    android:contentDescription="test"/>
+                    android:background="#2ad11a" />
                 <!-- -->
 
             </LinearLayout>
@@ -118,8 +113,7 @@
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#2ad11a"
-                    android:contentDescription="test"/>
+                    android:background="#2ad11a" />
                 <!-- -->
             </LinearLayout>
 
@@ -135,8 +129,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#2ad11a"
-                android:contentDescription="test"/>
+                android:background="#2ad11a" />
             <!-- -->
         </LinearLayout>
 
