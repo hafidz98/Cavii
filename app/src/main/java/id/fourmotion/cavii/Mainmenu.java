@@ -32,22 +32,6 @@ public class Mainmenu extends AppCompatActivity {
         final String selectedItemJenis[] = new String[1];
         final String selectedItemBahan[] = new String[1];
 
-        // -----------Search View Override-----------
-        SearchView searchEngine = findViewById(R.id.search_engine);
-        searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Mengambil data dari Search View
-                input[0] = newText;
-                return false;
-            }
-        });
-
         // ---------Filter Jenis Override-------------
         final int selectJenis[] = new int[1];
         selectJenis[0] = 0;
@@ -144,6 +128,22 @@ public class Mainmenu extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
+            }
+        });
+
+        // -----------Search View Override-----------
+        SearchView searchEngine = findViewById(R.id.search_engine);
+        searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //Mengambil data dari Search View
+                input[0] = newText;
+                return false;
             }
         });
 
