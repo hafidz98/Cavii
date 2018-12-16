@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -14,9 +15,8 @@ public class Splashscreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
 
-
+        // Handler delay activity splashscreen
         byte second = 5;
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -24,5 +24,7 @@ public class Splashscreen extends AppCompatActivity {
                 finish();
             }
         }, 1000 * second);
+
+        //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 }
