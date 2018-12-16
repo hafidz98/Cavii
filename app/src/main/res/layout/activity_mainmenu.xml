@@ -28,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/rectangle_border"
-                android:queryHint="Cari konveksi disini"
-                android:iconifiedByDefault="false"></SearchView>
+                android:iconifiedByDefault="false"
+                android:queryHint="Cari konveksi disini"></SearchView>
         </LinearLayout>
 
         <LinearLayout
@@ -38,16 +38,12 @@
             android:layout_weight="1"
             android:padding="5dp">
 
-            <!--<Spinner
-                android:id="@+id/jenis_filter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/rectangle_border"></Spinner> -->
             <Spinner
                 android:id="@+id/jenis_filter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/rectangle_border"></Spinner>
+                android:background="@drawable/rectangle_border"
+                android:spinnerMode="dropdown"></Spinner>
         </LinearLayout>
 
         <LinearLayout
@@ -60,6 +56,7 @@
                 android:id="@+id/bahan_filter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:spinnerMode="dropdown"
                 android:background="@drawable/rectangle_border"></Spinner>
         </LinearLayout>
 
