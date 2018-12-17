@@ -121,7 +121,8 @@ public class Mainmenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Take data from selected item
-                selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
+                selectedItemBahan[0] = (String) parent.getItemAtPosition(position);
+                selectBahan[0] = parent.getSelectedItemPosition();
 
             }
 
