@@ -16,7 +16,7 @@ public class Splashscreen extends AppCompatActivity {
         setContentView(R.layout.activity_splashscreen);
 
         // Handler delay activity splashscreen
-        byte second = 5;
+        byte second = 3;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

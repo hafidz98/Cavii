@@ -160,5 +160,10 @@ public class Mainmenu extends AppCompatActivity {
                 }
             }
         });
+
+        //getActionBar().show();
+        // Menampilkan action bar
+        getSupportActionBar().show();
+
     }
 }

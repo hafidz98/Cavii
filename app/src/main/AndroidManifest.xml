@@ -27,7 +27,9 @@
         <activity
             android:name=".Mainmenu"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama"/>
+            android:theme="@style/ThemeUtama">
+
+        </activity>
 
         <!-- Bagian detail dari hasil pencarian -->
         <activity android:name=".DetailContent"/>
