@@ -123,6 +123,7 @@ public class Mainmenu extends AppCompatActivity {
                 //Take data from selected item
                 selectedItemBahan[0] = (String) parent.getItemAtPosition(position);
                 selectBahan[0] = parent.getSelectedItemPosition();
+                //tes
 
             }
 
