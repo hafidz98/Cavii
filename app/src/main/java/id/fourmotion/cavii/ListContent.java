@@ -9,14 +9,5 @@ public class ListContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_content);
-
-        //get data from previous activity
-        Bundle receivedData = getIntent().getExtras();
-        String data [] = receivedData.getStringArray("dataSearch()");
-
-        //extract data from data array
-        String dataSearch = data[0];
-        String dataJenis = data[1];
-        String dataBahan = data[2];
     }
 }
