@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Teks judul konten -->
+    <TextView
+        android:id="@+id/txt_judul_konveksi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:text="TextView" />
+
+    <!-- Kapsul konten -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="horizontal">
+
+        <!-- Kolom kiri -->
+        <!-- Gambar deskripsi -->
+        <LinearLayout
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Menampilkan gambar -->
+            <ImageView
+                android:id="@+id/img_konveksi"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:src="@mipmap/ic_launcher" />
+
+        </LinearLayout>
+
+        <!-- Kolom kanan -->
+        <!-- Kapsul Keterangan -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Bungkus teks atas -->
+            <LinearLayout
+                android:paddingTop="5dp"
+                android:paddingRight="5dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Teks deskripsi jenis -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Jenis" />
+
+                <!-- Teks jenis -->
+                <TextView
+                    android:id="@+id/txt_jenis"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@drawable/textbox_custom_border" />
+
+                <!-- Teks deskripsi bahan -->
+                <TextView
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bahan" />
+
+                <!-- Teks bahan -->
+                <TextView
+                    android:id="@+id/txt_bahan"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@drawable/textbox_custom_border" />
+            </LinearLayout>
+
+
+            <!-- Kapsul teks deskripsi harga -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <!-- Teks judul -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Harga" />
+
+                <!-- Teks harga -->
+                <TextView
+                    android:id="@+id/txt_harga"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:background="@color/colorPrimary" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
