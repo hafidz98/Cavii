@@ -72,7 +72,7 @@ public class Mainmenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Take data from selected item
-                selectedItemBahan[0] = (String) parent.getItemAtPosition(position);
+                selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
                 selectJenis[0] = parent.getSelectedItemPosition();
             }
 
@@ -157,6 +157,9 @@ public class Mainmenu extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     // Place code here to send intent and data
+                    //selectedItemJenis[0]
+                    //selectedItemBahan[0]
+                    //input[0]
                 } catch (Exception e) {
                     Log.d("Error", "Sending Error");
                 }
