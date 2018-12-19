@@ -1,24 +1,18 @@
 package id.fourmotion.cavii;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Mainmenu extends AppCompatActivity {
 
@@ -72,7 +66,7 @@ public class Mainmenu extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Take data from selected item
-                selectedItemBahan[0] = (String) parent.getItemAtPosition(position);
+                selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
                 selectJenis[0] = parent.getSelectedItemPosition();
             }
 
@@ -144,7 +138,7 @@ public class Mainmenu extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 //Mengambil data dari Search View
-                input[0] = newText;
+                input[0] = (String) newText;
                 return false;
             }
         });
@@ -157,6 +151,16 @@ public class Mainmenu extends AppCompatActivity {
             public void onClick(View view) {
                 try {
                     // Place code here to send intent and data
+                    //data di bawah ini sudah berupa string
+                    //input[0] = 0
+                    //selectedItemJenis[0] = 1
+                    //selectedItemBahan[0] = 2
+                    String sendData[] = {input[0], selectedItemJenis[0], selectedItemBahan[0]};
+
+                    Intent toListContent = new Intent(Mainmenu.this, ListContent.class);
+                    toListContent.putExtra("dataSearch()", sendData);
+
+                    startActivity(toListContent);
                 } catch (Exception e) {
                     Log.d("Error", "Sending Error");
                 }
