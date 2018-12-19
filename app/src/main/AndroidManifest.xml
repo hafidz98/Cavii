@@ -14,7 +14,7 @@
         <activity
             android:name=".Splashscreen"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama">
+            android:theme="@style/ThemeSplash">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,9 @@
         <activity
             android:name=".Mainmenu"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama"/>
+            android:theme="@style/ThemeUtama">
+
+        </activity>
 
         <!-- Bagian detail dari hasil pencarian -->
         <activity android:name=".DetailContent"/>
