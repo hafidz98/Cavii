@@ -128,18 +128,22 @@ public class Mainmenu extends AppCompatActivity {
         });
 
         // -----------Search View Override-----------
-        SearchView searchEngine = findViewById(R.id.search_engine);
-        searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        final SearchView searchEngine = findViewById(R.id.search_engine);
+        searchEngine.setOnSearchClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+            public void onClick(View view) {
+                searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        input[0] = (String) query;
+                        return false;
+                    }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //Mengambil data dari Search View
-                input[0] = (String) newText;
-                return false;
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                });
             }
         });
 
