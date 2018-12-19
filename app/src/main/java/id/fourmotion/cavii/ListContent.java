@@ -35,6 +35,9 @@ public class ListContent extends AppCompatActivity {
     }
 
     void addData(){
+
+
+
         contentArrayList = new ArrayList<>();
         contentArrayList.add(new Content("Kahoona Konveksi", "Kemeja","Katun","20000"));
         contentArrayList.add(new Content("Alesha Shirt", "Kemeja Panjang","Katun","25000"));
