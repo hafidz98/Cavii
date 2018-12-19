@@ -5,9 +5,9 @@ public class Content {
     private String judul;
     private String jenis;
     private String bahan;
-    private int harga;
+    private String harga;
 
-    public Content(String judul, String jenis, String bahan, int harga) {
+    public Content(String judul, String jenis, String bahan, String harga) {
         this.judul = judul;
         this.jenis = jenis;
         this.bahan = bahan;
@@ -26,7 +26,7 @@ public class Content {
         return bahan;
     }
 
-    public int getHarga() {
+    public String getHarga() {
         return harga;
     }
 
@@ -42,7 +42,7 @@ public class Content {
         this.bahan = bahan;
     }
 
-    public void setHarga(int harga) {
+    public void setHarga(String harga) {
         this.harga = harga;
     }
 }

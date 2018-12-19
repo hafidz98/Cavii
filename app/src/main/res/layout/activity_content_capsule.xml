@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:paddingBottom="10dp">
 
     <!-- Teks judul konten -->
     <TextView
@@ -16,6 +17,7 @@
 
     <!-- Kapsul konten -->
     <LinearLayout
+        android:background="@color/backgroundColorWhite"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="horizontal">
@@ -63,6 +65,7 @@
 
                 <!-- Teks jenis -->
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/txt_jenis"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
@@ -77,6 +80,7 @@
 
                 <!-- Teks bahan -->
                 <TextView
+                    android:gravity="center"
                     android:id="@+id/txt_bahan"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
@@ -102,6 +106,7 @@
                     android:id="@+id/txt_harga"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
+                    android:gravity="center"
                     android:background="@color/colorPrimary" />
 
             </LinearLayout>
