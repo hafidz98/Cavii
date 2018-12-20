@@ -157,7 +157,7 @@ public class Mainmenu extends AppCompatActivity {
     public void cari(View view) {
         // Place code here to send intent and data
         //data di bawah ini sudah berupa string
-        //input = get(0)
+        //input search = get(0)
         //selectedItemJenis = get(1)
         //selectedItemBahan = get(2)
         if ((input == null || input.length() < 1) && (selectedItemJenis == null)){
