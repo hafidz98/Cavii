@@ -38,6 +38,7 @@ public class Mainmenu extends AppCompatActivity {
         final String input[] = new String[1];
         final String selectedItemJenis[] = new String[1];
         final String selectedItemBahan[] = new String[1];
+        db = new MyDatabase(this);
 
         // ---------Filter Bahan Override-------------
         bans = db.getBahan();
@@ -88,7 +89,6 @@ public class Mainmenu extends AppCompatActivity {
 
 
         // ---------Filter Jenis Override-------------
-        db = new MyDatabase(this);
         jens = db.getJenis();
         final int selectJenis[] = new int[1];
         selectJenis[0] = 0;
