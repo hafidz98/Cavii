@@ -1,6 +1,7 @@
 package id.fourmotion.cavii;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -11,21 +12,30 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.IOException;
 
 import id.fourmotion.cavii.Helper.DataBaseHelper;
+import id.fourmotion.cavii.Helper.MyDatabase;
 
 public class Mainmenu extends AppCompatActivity {
+
+    private Cursor jens;
+    private MyDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
+        db = new MyDatabase(this);
+        jens = db.getJenis();
+        /*
         // test
         DataBaseHelper myDbHelper = new DataBaseHelper(this);
 
@@ -40,7 +50,7 @@ public class Mainmenu extends AppCompatActivity {
         } catch (SQLException sqle){
             throw sqle;
         }
-
+        */
 
         // -----------Final data to send via intent-------
         final String input[] = new String[1];
@@ -53,6 +63,14 @@ public class Mainmenu extends AppCompatActivity {
 
         final Spinner filterJenis = findViewById(R.id.jenis_filter);
 
+        ListAdapter adapter = new SimpleCursorAdapter(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                jens, new String[]{"cav_jen_name"},
+                new int[]{R.id.jenis_filter});
+
+        //getListView().setAdapter(adapter);
+
+        /*
         String[] jenisItem = new String[]{
                 "Pilih jenis baju: ",
                 "Kaos oblong",
@@ -61,7 +79,8 @@ public class Mainmenu extends AppCompatActivity {
         };
 
         final ArrayAdapter<String> jenisArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.support_simple_spinner_dropdown_item, jenisItem) {
+                this, R.layout.support_simple_spinner_dropdown_item, jenisItem){
+
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
@@ -78,7 +97,9 @@ public class Mainmenu extends AppCompatActivity {
                 }
                 return view;
             }
+
         };
+
 
         jenisArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         filterJenis.setAdapter(jenisArrayAdapter);
@@ -96,7 +117,7 @@ public class Mainmenu extends AppCompatActivity {
 
             }
         });
-
+        */
 
         // ---------Filter Jenis Override-------------
         final Spinner filterBahan = findViewById(R.id.bahan_filter);
