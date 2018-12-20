@@ -15,7 +15,11 @@
             android:name=".Splashscreen"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <!-- Bagian menu utama -->
@@ -33,13 +37,6 @@
         <activity android:name=".ListContent"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeUtama">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
     </application>
