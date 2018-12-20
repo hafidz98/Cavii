@@ -1,33 +1,25 @@
 package id.fourmotion.cavii;
 
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.SQLException;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import id.fourmotion.cavii.Helper.DataBaseHelper;
 import id.fourmotion.cavii.Helper.MyDatabase;
 
 public class Mainmenu extends AppCompatActivity {
 
-    private ArrayList<String> jens, bans;
-    private MyDatabase db;
+    private String input, selectedItemJenis, selectedItemBahan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +27,9 @@ public class Mainmenu extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
         // -----------Final data to send via intent-------
-        final String input[] = new String[1];
-        final String selectedItemJenis[] = new String[1];
-        final String selectedItemBahan[] = new String[1];
+        MyDatabase db;
         db = new MyDatabase(this);
+        ArrayList<String> jens, bans;
 
         // ---------Filter Bahan Override-------------
         bans = db.getBahan();
@@ -46,13 +37,11 @@ public class Mainmenu extends AppCompatActivity {
         final int selectBahan[] = new int[1];
         selectBahan[0] = 0;
 
-
-
         final ArrayAdapter<String> bahanArrayAdapter = new ArrayAdapter<String>(
                 this, R.layout.support_simple_spinner_dropdown_item, bans) {
             @Override
             public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
+                                        ViewGroup  parent) {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView tv = (TextView) view;
                 if (position == selectBahan[0]) {
@@ -75,12 +64,13 @@ public class Mainmenu extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Take data from selected item
                 selectBahan[0] = parent.getSelectedItemPosition();
-                if (selectBahan[0] == 0){
-                    selectedItemBahan[0] = null;
+                if (selectBahan[0] == 0) {
+                    selectedItemBahan = null;
                 } else {
-                    selectedItemBahan[0] = (String) parent.getItemAtPosition(position);
+                    selectedItemBahan = (String) parent.getItemAtPosition(position);
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -92,11 +82,10 @@ public class Mainmenu extends AppCompatActivity {
         jens = db.getJenis();
         final int selectJenis[] = new int[1];
         selectJenis[0] = 0;
-
         final Spinner filterJenis = findViewById(R.id.jenis_filter);
 
         final ArrayAdapter<String> jenisArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.support_simple_spinner_dropdown_item, jens){
+                this, R.layout.support_simple_spinner_dropdown_item, jens) {
 
             @Override
             public View getDropDownView(int position, View convertView,
@@ -125,16 +114,17 @@ public class Mainmenu extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Take data from selected item
                 selectJenis[0] = parent.getSelectedItemPosition();
-                if (selectJenis[0] == 0){
-                    selectedItemJenis [0] = null;
+                if (selectJenis[0] == 0) {
+                    selectedItemJenis = null;
 
                     //set false to filter bahan
                     filterBahan.setSelection(0);
+                    selectBahan[0] = 0;
                     filterBahan.setEnabled(false);
                     filterBahan.setClickable(false);
 
                 } else {
-                    selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
+                    selectedItemJenis = (String) parent.getItemAtPosition(position);
 
                     //set true to filter bahan
                     filterBahan.setEnabled(true);
@@ -144,54 +134,43 @@ public class Mainmenu extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
         // -----------Search View Override-----------
         final SearchView searchEngine = findViewById(R.id.search_engine);
-        searchEngine.setOnSearchClickListener(new View.OnClickListener() {
+        searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onClick(View view) {
-                searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        input[0] = query;
-                        return false;
-                    }
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        return false;
-                    }
-                });
+            @Override
+            public boolean onQueryTextChange(String s) {
+                input = s;
+                return false;
             }
         });
+    }
 
+    public void cari(View view) {
+        // Place code here to send intent and data
+        //data di bawah ini sudah berupa string
+        //input = get(0)
+        //selectedItemJenis = get(1)
+        //selectedItemBahan = get(2)
+        if ((input == null || input.length() < 1) && (selectedItemJenis == null)){
+            Toast.makeText(Mainmenu.this, "Isi filter atau pencarian", Toast.LENGTH_SHORT).show();
+        } else {
+            ArrayList<String> sendData = new ArrayList<>();
+            sendData.add(input);
+            sendData.add(selectedItemJenis);
+            sendData.add(selectedItemBahan);
 
-        // -----------Button Override----------------
-        Button tombolCari = findViewById(R.id.tombolcari);
-        tombolCari.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    // Place code here to send intent and data
-                    //data di bawah ini sudah berupa string
-                    //input[0] = 0
-                    //selectedItemJenis[0] = 1
-                    //selectedItemBahan[0] = 2
-                    String sendData[] = {input[0], selectedItemJenis[0], selectedItemBahan[0]};
+            Intent toListContent = new Intent(Mainmenu.this, ListContent.class);
+            toListContent.putExtra("dataSearch()", sendData);
 
-                    Intent toListContent = new Intent(Mainmenu.this, ListContent.class);
-                    toListContent.putExtra("dataSearch()", sendData);
-
-                    startActivity(toListContent);
-                } catch (Exception e) {
-                    Log.d("Error", "Sending Error");
-                }
-            }
-        });
-
-
+            startActivity(toListContent);
+        }
     }
 }
