@@ -71,14 +71,17 @@ public class MyDatabase extends SQLiteAssetHelper {
         ArrayList<Content> contentArrayList;
         SQLiteDatabase db = getWritableDatabase();
 
-        String[] sqlSelect = {"cav_name","cav_jen_name", "cav_ba_name" , "cav_cost"};
+        String[] sqlSelect = {"cav_name", "cav_jen_name", "cav_ba_name", "cav_cost"};
+        String qSelect = null;
 
-        final String qSelect = "SELECT cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost FROM cavii_trans " +
+
+        qSelect = "SELECT cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_jenis.cav_jen_name LIKE ? OR cavii_bahan.cav_ba_name LIKE ? ORDER BY cavii_trans.cav_cost ASC";
 
-        String [] searchParams = new String[] {String.valueOf(jenis)+ "%", String.valueOf(bahan) + "%"};
+
+        String[] searchParams = new String[]{String.valueOf(jenis) + "%", String.valueOf(bahan) + "%"};
 
         //selectionArgs = new String [] {String.valueOf(g),String.valueOf(s)};
 
