@@ -29,7 +29,7 @@
         <Spinner
             android:id="@+id/jenis_filter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/spinner_custom_border" />
 
@@ -37,7 +37,7 @@
         <Spinner
             android:id="@+id/bahan_filter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_margin="5dp"
             android:background="@drawable/spinner_custom_border" />
 
