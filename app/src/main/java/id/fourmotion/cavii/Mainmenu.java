@@ -1,6 +1,7 @@
 package id.fourmotion.cavii;
 
 import android.content.Intent;
+import android.database.SQLException;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,12 +15,32 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.IOException;
+
+import id.fourmotion.cavii.Helper.DataBaseHelper;
+
 public class Mainmenu extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
+
+        // test
+        DataBaseHelper myDbHelper = new DataBaseHelper(this);
+
+        try {
+            myDbHelper.createDatabase();
+        } catch (IOException ioe){
+            throw new Error("Unable");
+        }
+
+        try {
+            myDbHelper.openDataBase();
+        } catch (SQLException sqle){
+            throw sqle;
+        }
+
 
         // -----------Final data to send via intent-------
         final String input[] = new String[1];
@@ -170,5 +191,7 @@ public class Mainmenu extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 }

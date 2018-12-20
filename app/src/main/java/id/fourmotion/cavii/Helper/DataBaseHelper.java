@@ -14,7 +14,7 @@ import java.io.OutputStream;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     // default databases directory folder
-    private static String DB_PATH = "/data/data/id.fourmotion.cavii/assets/databases";
+    private static String DB_PATH = "/data/data/id.fourmotion.cavii/databases/";
 
     // database file
     private  static String DB_NAME = "db_cavii_v1.db";
