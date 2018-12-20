@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:onClick="@+id/clickContent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="10dp">
+    android:layout_height="wrap_content">
 
     <!-- Teks judul konten -->
     <TextView
@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:padding="5dp"
+        android:layout_marginTop="10dp"
         android:textSize="20sp"
         android:text="TextView" />
 
