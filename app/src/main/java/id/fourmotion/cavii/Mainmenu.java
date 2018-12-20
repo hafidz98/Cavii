@@ -19,13 +19,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import id.fourmotion.cavii.Helper.DataBaseHelper;
 import id.fourmotion.cavii.Helper.MyDatabase;
 
 public class Mainmenu extends AppCompatActivity {
 
-    private Cursor jens;
+    private ArrayList<String> jens, bans;
     private MyDatabase db;
 
     @Override
@@ -33,53 +34,21 @@ public class Mainmenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
-        db = new MyDatabase(this);
-        jens = db.getJenis();
-        /*
-        // test
-        DataBaseHelper myDbHelper = new DataBaseHelper(this);
-
-        try {
-            myDbHelper.createDatabase();
-        } catch (IOException ioe){
-            throw new Error("Unable");
-        }
-
-        try {
-            myDbHelper.openDataBase();
-        } catch (SQLException sqle){
-            throw sqle;
-        }
-        */
-
         // -----------Final data to send via intent-------
         final String input[] = new String[1];
         final String selectedItemJenis[] = new String[1];
         final String selectedItemBahan[] = new String[1];
 
         // ---------Filter Jenis Override-------------
+        db = new MyDatabase(this);
+        jens = db.getJenis();
         final int selectJenis[] = new int[1];
         selectJenis[0] = 0;
 
         final Spinner filterJenis = findViewById(R.id.jenis_filter);
 
-        ListAdapter adapter = new SimpleCursorAdapter(this,
-                R.layout.support_simple_spinner_dropdown_item,
-                jens, new String[]{"cav_jen_name"},
-                new int[]{R.id.jenis_filter});
-
-        //getListView().setAdapter(adapter);
-
-        /*
-        String[] jenisItem = new String[]{
-                "Pilih jenis baju: ",
-                "Kaos oblong",
-                "Kaos berkerah",
-                "Kemeja lengan pendek"
-        };
-
         final ArrayAdapter<String> jenisArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.support_simple_spinner_dropdown_item, jenisItem){
+                this, R.layout.support_simple_spinner_dropdown_item, jens){
 
             @Override
             public View getDropDownView(int position, View convertView,
@@ -117,22 +86,18 @@ public class Mainmenu extends AppCompatActivity {
 
             }
         });
-        */
+
 
         // ---------Filter Jenis Override-------------
+        bans = db.getBahan();
         final Spinner filterBahan = findViewById(R.id.bahan_filter);
         final int selectBahan[] = new int[1];
         selectBahan[0] = 0;
 
-        String[] jenisBahan = new String[]{
-                "Pilih bahan baju: ",
-                "Katun",
-                "Sintetis",
-                "Sutra"
-        };
+
 
         final ArrayAdapter<String> bahanArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.support_simple_spinner_dropdown_item, jenisBahan) {
+                this, R.layout.support_simple_spinner_dropdown_item, bans) {
             @Override
             public View getDropDownView(int position, View convertView,
                                         ViewGroup parent) {
@@ -153,21 +118,27 @@ public class Mainmenu extends AppCompatActivity {
         bahanArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         filterBahan.setAdapter(bahanArrayAdapter);
 
-        filterBahan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        filterJenis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //Take data from selected item
-                selectedItemBahan[0] = (String) parent.getItemAtPosition(position);
-                selectBahan[0] = parent.getSelectedItemPosition();
-                //tes
-
+                selectJenis[0] = parent.getSelectedItemPosition();
+                if (selectJenis[0] == 0){
+                    selectedItemJenis[0] = "tidak_ada";
+                    filterBahan.setSelection(0);
+                    filterBahan.setEnabled(false);
+                    filterBahan.setClickable(false);
+                } else {
+                    selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
+                    filterBahan.setEnabled(true);
+                    filterBahan.setClickable(true);
+                }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
-        });
+            });
 
         // -----------Search View Override-----------
         final SearchView searchEngine = findViewById(R.id.search_engine);
