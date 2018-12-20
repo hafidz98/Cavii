@@ -28,7 +28,7 @@ public class ListContent extends AppCompatActivity {
 
         MyDatabase db = new MyDatabase(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_content);
+        recyclerView = findViewById(R.id.rv_content);
         if (dataEkstra.get(0) == null || dataEkstra.get(0).length() <1){
             try {
                 defaultData();
