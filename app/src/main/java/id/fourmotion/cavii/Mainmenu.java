@@ -30,7 +30,7 @@ public class Mainmenu extends AppCompatActivity {
         MyDatabase db;
         db = new MyDatabase(this);
         ArrayList<String> jens, bans;
-
+//
         // ---------Filter Bahan Override-------------
         bans = db.getBahan();
         final Spinner filterBahan = findViewById(R.id.bahan_filter);
