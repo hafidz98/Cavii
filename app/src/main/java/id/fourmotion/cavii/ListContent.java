@@ -8,24 +8,25 @@ import android.support.v7.widget.RecyclerView;
 import java.util.ArrayList;
 
 import id.fourmotion.cavii.Adapter.ContentAdapter;
+import id.fourmotion.cavii.Helper.MyDatabase;
 import id.fourmotion.cavii.Model.Content;
 
 public class ListContent extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private ContentAdapter adapter;
-    private ArrayList<Content> contentArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_content);
 
-        addData();
+        MyDatabase db = new MyDatabase(this);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.rv_content);
 
-        adapter = new ContentAdapter(contentArrayList);
+        adapter = new ContentAdapter(db.getSearchKonveksi("Kemeja","Katun"));
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
 
@@ -33,11 +34,10 @@ public class ListContent extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
     }
-
+    /*
     void addData(){
         contentArrayList = new ArrayList<>();
         contentArrayList.add(new Content("Kahoona Konveksi", "Kemeja","Katun","20000"));
-        contentArrayList.add(new Content("Alesha Shirt", "Kemeja Panjang","Katun","25000"));
-        contentArrayList.add(new Content("Konveksi Diana", "Kaos","Katun","30000"));
     }
+    */
 }
