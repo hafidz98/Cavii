@@ -108,4 +108,5 @@ public class MyDatabase extends SQLiteAssetHelper {
         }
         return contentArrayList;
     }
+    //
 }
