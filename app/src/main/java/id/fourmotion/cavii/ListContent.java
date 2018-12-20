@@ -24,7 +24,7 @@ public class ListContent extends AppCompatActivity {
         MyDatabase db = new MyDatabase(this);
 
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_content);
+        recyclerView = findViewById(R.id.rv_content);
 
         adapter = new ContentAdapter(db.getSearchKonveksi("Kemeja","Katun"));
 
