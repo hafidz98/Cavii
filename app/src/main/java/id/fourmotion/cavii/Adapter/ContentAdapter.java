@@ -42,7 +42,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.txtJenis.setText(dataList.get(position).getJenis());
         holder.txtBahan.setText(dataList.get(position).getBahan());
         holder.txtHarga.setText(dataList.get(position).getHarga());
-        holder.imgPath.setImageDrawable(Drawable.createFromPath("image/" + dataList.get(position).getImgPath()));
+        //holder.imgPath.setImageDrawable(Drawable.createFromPath("image/" + dataList.get(position).getImgPath()));
         //holder.imgPath.getDrawable();
     }
 
