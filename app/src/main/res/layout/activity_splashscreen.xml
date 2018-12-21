@@ -10,8 +10,10 @@
     <!-- Set gamabar untuk logo Cavii di src -->
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_cavii_text"
+        android:layout_height="50dp"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:src="@drawable/cavii"
         android:contentDescription="test" />
 
 </LinearLayout>
