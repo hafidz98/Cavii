@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,6 +27,17 @@ public class ListContent extends AppCompatActivity {
         //Take data from extras
         ArrayList<String> dataEkstra = getIntent().getStringArrayListExtra("dataSearch()");
 
+        //put data to text field
+        TextView filterJenis = findViewById(R.id.jenis_filter);
+        TextView filterBahan = findViewById(R.id.bahan_filter);
+
+        String stringJenis = "Jenis: " + dataEkstra.get(1);
+        String stringBahan = "Bahan: " + dataEkstra.get(2);
+
+        filterJenis.setText(stringJenis);
+        filterBahan.setText(stringBahan);
+
+        //take data from database
         MyDatabase db = new MyDatabase(this);
 
         recyclerView = findViewById(R.id.rv_content);
