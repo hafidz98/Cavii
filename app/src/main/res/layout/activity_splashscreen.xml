@@ -15,6 +15,6 @@
         android:padding="70dp"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
-        android:src="@drawable/cavii_logo" />
+        android:src="@drawable/cavii" />
 
 </LinearLayout>
