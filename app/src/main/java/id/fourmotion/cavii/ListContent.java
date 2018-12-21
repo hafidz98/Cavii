@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import id.fourmotion.cavii.Adapter.ContentAdapter;
 import id.fourmotion.cavii.Helper.MyDatabase;
@@ -45,6 +46,7 @@ public class ListContent extends AppCompatActivity {
             try {
                 defaultData();
                 adapter = new ContentAdapter(db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)));
+                //Toast.makeText(ListContent.this, );
             } catch (Exception e) {
                 //Data tidak ditemukan
                 Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
