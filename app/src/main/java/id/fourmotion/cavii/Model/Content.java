@@ -2,16 +2,26 @@ package id.fourmotion.cavii.Model;
 
 public class Content {
 
+    private String _id;
     private String judul;
     private String jenis;
     private String bahan;
     private String harga;
+    private String imgPath;
 
-    public Content(String judul, String jenis, String bahan, String harga) {
+    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath) {
+        this._id = _id;
         this.judul = judul;
         this.jenis = jenis;
         this.bahan = bahan;
         this.harga = harga;
+        this.imgPath = imgPath;
+    }
+
+
+    // Getter
+    public String get_id() {
+        return _id;
     }
 
     public String getJudul() {
@@ -30,6 +40,16 @@ public class Content {
         return harga;
     }
 
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    // Setter
+    public void set_id(String _id) {
+        this._id = _id;
+    }
+
+    /*
     public void setJudul(String judul) {
         this.judul = judul;
     }
@@ -45,4 +65,9 @@ public class Content {
     public void setHarga(String harga) {
         this.harga = harga;
     }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
+    */
 }

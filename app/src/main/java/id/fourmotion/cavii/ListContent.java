@@ -63,7 +63,7 @@ public class ListContent extends AppCompatActivity {
 
     void defaultData(){
         contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content("","","",""));
+        contentArrayList.add(new Content("","","","", "",""));
         adapter = new ContentAdapter(contentArrayList);
     }
 }
