@@ -7,12 +7,14 @@
     android:gravity="center"
     tools:context=".Splashscreen">
 
-    <!-- Set gamabar untuk logo Cavii di src -->
+    <!-- Set gambar untuk logo Cavii di src -->
     <ImageView
+        android:id="@+id/imageLogo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="70dp"
         android:scaleType="centerInside"
         android:adjustViewBounds="true"
-        android:src="@drawable/cavii" />
+        android:src="@drawable/cavii_logo" />
 
 </LinearLayout>
