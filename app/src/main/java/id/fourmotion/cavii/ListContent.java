@@ -23,24 +23,20 @@ public class ListContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_content);
 
-
-
-
         //Take data from extras
         ArrayList<String> dataEkstra = getIntent().getStringArrayListExtra("dataSearch()");
 
         MyDatabase db = new MyDatabase(this);
 
-        recyclerView = (RecyclerView) findViewById(R.id.rv_content);
+        recyclerView = findViewById(R.id.rv_content);
         if (dataEkstra.get(0) == null || dataEkstra.get(0).length() <1){
             try {
+                defaultData();
                 adapter = new ContentAdapter(db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)));
             } catch (Exception e) {
                 //Data tidak ditemukan
                 Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
-                contentArrayList = new ArrayList<>();
-                contentArrayList.add(new Content("","","",""));
-                adapter = new ContentAdapter(contentArrayList);
+                defaultData();
             }
         } else {
             //pake search view
@@ -51,5 +47,11 @@ public class ListContent extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         recyclerView.setAdapter(adapter);
+    }
+
+    void defaultData(){
+        contentArrayList = new ArrayList<>();
+        contentArrayList.add(new Content("","","",""));
+        adapter = new ContentAdapter(contentArrayList);
     }
 }
