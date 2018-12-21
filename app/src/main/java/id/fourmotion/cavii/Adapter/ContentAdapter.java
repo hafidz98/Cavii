@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.renderscript.ScriptGroup;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +19,15 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import id.fourmotion.cavii.Helper.MyDatabase;
+import id.fourmotion.cavii.ListContent;
 import id.fourmotion.cavii.Model.Content;
 import id.fourmotion.cavii.R;
 
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
 
     private ArrayList<Content> dataList;
+
+    //private String anu = getAnu().getApplicationContext().getPackageName();
 
     public ContentAdapter(ArrayList<Content> dataList) {
         this.dataList = dataList;
@@ -36,16 +40,31 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         return new ContentViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(ContentViewHolder holder, int position) {
         holder.txtJudul.setText(dataList.get(position).getJudul());
         holder.txtJenis.setText(dataList.get(position).getJenis());
         holder.txtBahan.setText(dataList.get(position).getBahan());
         holder.txtHarga.setText(dataList.get(position).getHarga());
-        //holder.imgPath.setImageDrawable(Drawable.createFromPath("image/" + dataList.get(position).getImgPath()));
+
+        //String imagePath = "R.drawable." + dataList.get(position).getImgPath();
+        //holder.imgPath.setImageResource(imagePath);
         //holder.imgPath.getDrawable();
+        //InputStream is = context.getAssets().open("aa");
+        //ListContent aa = new ListContent();
+        String imageName = dataList.get(position).getImgPath();
+        int resID = ListContent.context().getResources().getIdentifier(imageName, "drawable", ListContent.context().getPackageName());
+        //int resID = context.getResources().getIdentifier(imageName, "id", "id.fourmotion.cavii");
+        holder.imgPath.setImageResource(resID);
     }
 
+    /*
+        public Bitmap getImage(String anu){
+            AssetManager assetManager = context.getAssets();
+            InputStream is = assetManager.open(anu);
+        }
+    */
     public int getItemCount() {
         return (dataList != null) ? dataList.size() : 0;
     }

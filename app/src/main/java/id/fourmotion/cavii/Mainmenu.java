@@ -41,7 +41,7 @@ public class Mainmenu extends AppCompatActivity {
                 this, R.layout.support_simple_spinner_dropdown_item, bans) {
             @Override
             public View getDropDownView(int position, View convertView,
-                                        ViewGroup  parent) {
+                                        ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
                 TextView tv = (TextView) view;
                 if (position == selectBahan[0]) {
@@ -160,7 +160,7 @@ public class Mainmenu extends AppCompatActivity {
         //input search = get(0)
         //selectedItemJenis = get(1)
         //selectedItemBahan = get(2)
-        if ((input == null || input.length() < 1) && (selectedItemJenis == null)){
+        if ((input == null || input.length() < 1) && (selectedItemJenis == null)) {
             Toast.makeText(Mainmenu.this, "Isi filter atau pencarian", Toast.LENGTH_SHORT).show();
         } else {
             ArrayList<String> sendData = new ArrayList<>();
