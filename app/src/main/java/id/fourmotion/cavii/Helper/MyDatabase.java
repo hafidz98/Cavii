@@ -71,11 +71,11 @@ public class MyDatabase extends SQLiteAssetHelper {
         ArrayList<Content> contentArrayList;
         SQLiteDatabase db = getWritableDatabase();
 
-        String[] sqlSelect = {"cav_name", "cav_jen_name", "cav_ba_name", "cav_cost"};
-        String qSelect = null;
+        String[] sqlSelect = {"_id","cav_name", "cav_jen_name", "cav_ba_name", "cav_cost","cav_pict"};
+        String qSelect;
 
 
-        qSelect = "SELECT cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost FROM cavii_trans " +
+        qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_jenis.cav_jen_name LIKE ? OR cavii_bahan.cav_ba_name LIKE ? ORDER BY cavii_trans.cav_cost ASC";
@@ -94,17 +94,23 @@ public class MyDatabase extends SQLiteAssetHelper {
         try {
             //dbBahan.add("Pilih Bahan Baju: ");
 
-            contentArrayList.add(new Content(c.getString(c.getColumnIndex(sqlSelect[0])),
+            contentArrayList.add(new Content(
+                    c.getString(c.getColumnIndex(sqlSelect[0])),
                     c.getString(c.getColumnIndex(sqlSelect[1])),
                     c.getString(c.getColumnIndex(sqlSelect[2])),
-                    c.getString(c.getColumnIndex(sqlSelect[3])))); //konten
+                    c.getString(c.getColumnIndex(sqlSelect[3])),
+                    c.getString(c.getColumnIndex(sqlSelect[4])),
+                    c.getString(c.getColumnIndex(sqlSelect[5])))); //konten
 
             //Toast.makeText(MyDatabase.this, "jjj", Toast.LENGTH_SHORT).show();
             while (c.moveToNext()) {
-                contentArrayList.add(new Content(c.getString(c.getColumnIndex(sqlSelect[0])),
+                contentArrayList.add(new Content(
+                        c.getString(c.getColumnIndex(sqlSelect[0])),
                         c.getString(c.getColumnIndex(sqlSelect[1])),
                         c.getString(c.getColumnIndex(sqlSelect[2])),
-                        c.getString(c.getColumnIndex(sqlSelect[3])))); //konten
+                        c.getString(c.getColumnIndex(sqlSelect[3])),
+                        c.getString(c.getColumnIndex(sqlSelect[4])),
+                        c.getString(c.getColumnIndex(sqlSelect[5])))); //konten
             }
         } finally {
             c.close();
