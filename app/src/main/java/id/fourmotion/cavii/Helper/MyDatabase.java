@@ -88,6 +88,7 @@ public class MyDatabase extends SQLiteAssetHelper {
         Cursor c = db.rawQuery(qSelect, searchParams);
         c.moveToFirst();
 
+
         //ArrayList<String> dbBahan = new ArrayList<>();
         contentArrayList = new ArrayList<>();
 

@@ -1,6 +1,12 @@
 package id.fourmotion.cavii;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,9 +15,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import id.fourmotion.cavii.Adapter.ContentAdapter;
@@ -23,6 +32,8 @@ public class ListContent extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ContentAdapter adapter;
     private ArrayList<Content> contentArrayList;
+    private ArrayList<String> dataEkstra;
+    private MyDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +41,7 @@ public class ListContent extends AppCompatActivity {
         setContentView(R.layout.activity_list_content);
 
         //Take data from extras
-        ArrayList<String> dataEkstra = getIntent().getStringArrayListExtra("dataSearch()");
+        dataEkstra = getIntent().getStringArrayListExtra("dataSearch()");
 
         //Put textview categories
         TextView filterJenis = findViewById(R.id.jenis_filter);
@@ -53,12 +64,13 @@ public class ListContent extends AppCompatActivity {
         filterJenis.setText(forJenis);
         filterBahan.setText(forBahan);
 
-        MyDatabase db = new MyDatabase(this);
+        db = new MyDatabase(this);
 
         recyclerView = findViewById(R.id.rv_content);
         if (dataEkstra.get(0) == null || dataEkstra.get(0).length() < 1) {
             try {
                 defaultData();
+                //adapter.setContext(ListContent.this);
                 adapter = new ContentAdapter(db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)));
             } catch (Exception e) {
                 //Data tidak ditemukan
@@ -79,22 +91,27 @@ public class ListContent extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                //Values are passing to activity & to fragment as well
-                Toast.makeText(ListContent.this, "Single Click on position        :" + position,
-                        Toast.LENGTH_SHORT).show();
+                //WARNING!!! Ganti ke ID from content
+                String sendData = db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)).get(position).get_id(); //
+
+                Toast.makeText(ListContent.this, db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)).get(position).getImgPath(), Toast.LENGTH_SHORT).show();
+
+                //Send Intent
+                Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
+                toDetailContent.putExtra("transaksiID()", sendData);
+
+                startActivity(toDetailContent);
             }
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(ListContent.this, "Long press on position :" + position,
-                        Toast.LENGTH_LONG).show();
             }
         }));
     }
 
     void defaultData() {
         contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content("", "", "", ""));
+        contentArrayList.add(new Content("", "", "", "", "", ""));
         adapter = new ContentAdapter(contentArrayList);
     }
 
