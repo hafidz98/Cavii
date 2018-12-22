@@ -47,10 +47,11 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.txtBahan.setText(dataList.get(position).getBahan());
         holder.txtHarga.setText(dataList.get(position).getHarga());
 
-        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + dataList.get(position).getImgPath());
+        InputStream stream = this.getClass().getClassLoader().getResourceAsStream("/assets/image/" + dataList.get(position).getImgPath());
         Bitmap bitmap = BitmapFactory.decodeStream(stream);
         holder.imgPath.setImageBitmap(bitmap);
         //holder.imgPath.getDrawable();
+
     }
 
     public int getItemCount() {

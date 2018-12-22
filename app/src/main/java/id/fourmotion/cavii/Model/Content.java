@@ -8,14 +8,20 @@ public class Content {
     private String bahan;
     private String harga;
     private String imgPath;
+    private String desc;
+    private String phone;
+    private String location;
 
-    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath) {
+    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath, String desc, String phone, String location) {
         this._id = _id;
         this.judul = judul;
         this.jenis = jenis;
         this.bahan = bahan;
         this.harga = harga;
         this.imgPath = imgPath;
+        this.desc = desc;
+        this.phone = phone;
+        this.location = location;
     }
 
 
@@ -42,6 +48,18 @@ public class Content {
 
     public String getImgPath() {
         return imgPath;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     // Setter

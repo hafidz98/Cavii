@@ -3,7 +3,9 @@ package id.fourmotion.cavii.Helper;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -11,6 +13,8 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.ArrayList;
 
 import id.fourmotion.cavii.Model.Content;
+
+import static java.lang.String.valueOf;
 
 public class MyDatabase extends SQLiteAssetHelper {
 
@@ -68,20 +72,21 @@ public class MyDatabase extends SQLiteAssetHelper {
 
 
     public ArrayList<Content> getSearchKonveksi(String jenis, String bahan) {
+
         ArrayList<Content> contentArrayList;
         SQLiteDatabase db = getWritableDatabase();
 
-        String[] sqlSelect = {"_id","cav_name", "cav_jen_name", "cav_ba_name", "cav_cost","cav_pict"};
+        String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin"};
         String qSelect;
 
 
-        qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict FROM cavii_trans " +
+        qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_jenis.cav_jen_name LIKE ? OR cavii_bahan.cav_ba_name LIKE ? ORDER BY cavii_trans.cav_cost ASC";
 
 
-        String[] searchParams = new String[]{String.valueOf(jenis) + "%", String.valueOf(bahan) + "%"};
+        String[] searchParams = new String[]{valueOf(jenis) + "%", valueOf(bahan) + "%"};
 
         //selectionArgs = new String [] {String.valueOf(g),String.valueOf(s)};
 
@@ -101,7 +106,8 @@ public class MyDatabase extends SQLiteAssetHelper {
                     c.getString(c.getColumnIndex(sqlSelect[2])),
                     c.getString(c.getColumnIndex(sqlSelect[3])),
                     c.getString(c.getColumnIndex(sqlSelect[4])),
-                    c.getString(c.getColumnIndex(sqlSelect[5])))); //konten
+                    c.getString(c.getColumnIndex(sqlSelect[5])),
+                    "", "","")); //konten
 
             //Toast.makeText(MyDatabase.this, "jjj", Toast.LENGTH_SHORT).show();
             while (c.moveToNext()) {
@@ -111,11 +117,36 @@ public class MyDatabase extends SQLiteAssetHelper {
                         c.getString(c.getColumnIndex(sqlSelect[2])),
                         c.getString(c.getColumnIndex(sqlSelect[3])),
                         c.getString(c.getColumnIndex(sqlSelect[4])),
-                        c.getString(c.getColumnIndex(sqlSelect[5])))); //konten
+                        c.getString(c.getColumnIndex(sqlSelect[5])),
+                        "", "", "")); //konten
             }
         } finally {
             c.close();
         }
+        return contentArrayList;
+    }
+
+    public ArrayList<Content> getDetailKonveksi(String id) {
+
+        ArrayList<Content> contentArrayList;
+        SQLiteDatabase db = getWritableDatabase();
+        String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin"};
+
+        String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans" +
+                "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id" +
+                "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id" +
+                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans.id = ? ORDER BY cavii_trans.cav_cost ASC";
+
+        String[] searchParams =  new String[]{id};
+
+        Cursor c = db.rawQuery(qSelect, searchParams);
+        c.moveToFirst();
+
+        contentArrayList = new ArrayList<>();
+        contentArrayList.add(new Content(null,
+                c.getString(c.getColumnIndex(sqlSelect[1])),
+                null,null,null,null, null, null, null));
+        c.close();
         return contentArrayList;
     }
     //

@@ -18,11 +18,13 @@
             android:name=".Splashscreen"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <!-- Bagian menu utama -->
@@ -34,7 +36,10 @@
         <!-- Bagian detail dari hasil pencarian -->
         <activity android:name=".DetailContent"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama"/>
+            android:theme="@style/ThemeUtama">
+
+
+        </activity>
 
         <!-- Bagian activity menampilkan pencarian -->
         <activity android:name=".ListContent"

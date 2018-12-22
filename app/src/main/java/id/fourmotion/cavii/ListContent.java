@@ -111,7 +111,7 @@ public class ListContent extends AppCompatActivity {
 
     void defaultData() {
         contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content("", "", "", "", "", ""));
+        contentArrayList.add(new Content("", "", "", "", "", "", null,null,null));
         adapter = new ContentAdapter(contentArrayList);
     }
 
