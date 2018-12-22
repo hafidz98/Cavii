@@ -13,9 +13,9 @@
         android:padding="5dp"
         android:layout_marginTop="10dp"
         android:textSize="20sp"
-        android:text="TextView" />
+        android:text="TextView" /><!-- Tutup teks judul -->
 
-    <!-- Kapsul konten -->
+    <!-- Bungkus konten isi -->
     <LinearLayout
         android:background="@color/backgroundColorWhite"
         android:layout_width="match_parent"
@@ -84,6 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
                     android:background="@drawable/textbox_custom_border" />
+
             </LinearLayout>
 
 
@@ -105,11 +106,12 @@
                     android:id="@+id/txt_harga"
                     android:layout_width="match_parent"
                     android:layout_height="25dp"
-                    android:gravity="center"
                     android:background="@color/colorPrimary" />
 
             </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout><!-- Tutup bungkus kontent -->
+
 </LinearLayout>
