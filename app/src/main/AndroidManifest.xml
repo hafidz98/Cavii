@@ -45,6 +45,9 @@
         <activity android:name=".ListContent"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeUtama">
+
+
+
         </activity>
 
     </application>

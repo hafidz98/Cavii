@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -70,6 +71,17 @@ public class MyDatabase extends SQLiteAssetHelper {
         return dbBahan;
     }
 
+    private ArrayList<String> id = new ArrayList<>();
+
+    public void setId (String Id){
+        id.add(Id);
+    }
+
+    public  String getId (int position){
+        return id.get(position);
+    }
+
+
 
     public ArrayList<Content> getSearchKonveksi(String jenis, String bahan) {
 
@@ -100,17 +112,8 @@ public class MyDatabase extends SQLiteAssetHelper {
         try {
             //dbBahan.add("Pilih Bahan Baju: ");
 
-            contentArrayList.add(new Content(
-                    c.getString(c.getColumnIndex(sqlSelect[0])),
-                    c.getString(c.getColumnIndex(sqlSelect[1])),
-                    c.getString(c.getColumnIndex(sqlSelect[2])),
-                    c.getString(c.getColumnIndex(sqlSelect[3])),
-                    c.getString(c.getColumnIndex(sqlSelect[4])),
-                    c.getString(c.getColumnIndex(sqlSelect[5])),
-                    "", "","")); //konten
-
             //Toast.makeText(MyDatabase.this, "jjj", Toast.LENGTH_SHORT).show();
-            while (c.moveToNext()) {
+            do {
                 contentArrayList.add(new Content(
                         c.getString(c.getColumnIndex(sqlSelect[0])),
                         c.getString(c.getColumnIndex(sqlSelect[1])),
@@ -119,35 +122,53 @@ public class MyDatabase extends SQLiteAssetHelper {
                         c.getString(c.getColumnIndex(sqlSelect[4])),
                         c.getString(c.getColumnIndex(sqlSelect[5])),
                         "", "", "")); //konten
-            }
+                setId(c.getString(c.getColumnIndex(sqlSelect[0])));
+            } while (c.moveToNext());
         } finally {
             c.close();
         }
         return contentArrayList;
     }
 
-    public ArrayList<Content> getDetailKonveksi(String id) {
 
-        ArrayList<Content> contentArrayList;
+    public Content getDetailKonveksi(String id) {
+
+        Content contentArrayList;
         SQLiteDatabase db = getWritableDatabase();
         String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin"};
 
-        String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans" +
-                "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id" +
-                "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id" +
-                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans.id = ? ORDER BY cavii_trans.cav_cost ASC";
+        String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans " +
+                "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
+                "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
+                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
 
-        String[] searchParams =  new String[]{id};
+        String[] searchParams = new String[]{id};
 
-        Cursor c = db.rawQuery(qSelect, searchParams);
-        c.moveToFirst();
+        try {
+            Cursor c = db.rawQuery(qSelect, searchParams);
+            c.moveToFirst();
 
-        contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content(null,
-                c.getString(c.getColumnIndex(sqlSelect[1])),
-                null,null,null,null, null, null, null));
-        c.close();
-        return contentArrayList;
+            //contentArrayList = new ArrayList<>();
+
+
+            contentArrayList = new Content(
+                    c.getString(c.getColumnIndex(sqlSelect[0])),
+                    c.getString(c.getColumnIndex(sqlSelect[1])),
+                    c.getString(c.getColumnIndex(sqlSelect[2])),
+                    c.getString(c.getColumnIndex(sqlSelect[3])),
+                    c.getString(c.getColumnIndex(sqlSelect[4])),
+                    c.getString(c.getColumnIndex(sqlSelect[5])),
+                    c.getString(c.getColumnIndex(sqlSelect[6])),
+                    c.getString(c.getColumnIndex(sqlSelect[6])),
+                    c.getString(c.getColumnIndex(sqlSelect[5])));
+            c.close();
+
+            return contentArrayList;
+        }catch ( Exception e){
+            Log.d("anu", "" + e);
+        }
+        return null;
     }
     //
+
 }

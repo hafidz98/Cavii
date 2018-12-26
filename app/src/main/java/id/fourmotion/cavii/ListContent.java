@@ -34,6 +34,7 @@ public class ListContent extends AppCompatActivity {
     private ArrayList<Content> contentArrayList;
     private ArrayList<String> dataEkstra;
     private MyDatabase db;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,13 +93,13 @@ public class ListContent extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 //WARNING!!! Ganti ke ID from content
-                String sendData = db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)).get(position).get_id(); //
+                //String sendData = db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)).get(position).get_id(); //
 
-                Toast.makeText(ListContent.this, db.getSearchKonveksi(dataEkstra.get(1), dataEkstra.get(2)).get(position).getImgPath(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ListContent.this, db.getId(position), Toast.LENGTH_SHORT).show();
 
                 //Send Intent
                 Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
-                toDetailContent.putExtra("transaksiID()", sendData);
+                toDetailContent.putExtra("trans_ID()", db.getId(position));
 
                 startActivity(toDetailContent);
             }
@@ -111,7 +112,7 @@ public class ListContent extends AppCompatActivity {
 
     void defaultData() {
         contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content("", "", "", "", "", "", null,null,null));
+        contentArrayList.add(new Content("", "", "", "", "", "", null, null, null));
         adapter = new ContentAdapter(contentArrayList);
     }
 

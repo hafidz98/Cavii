@@ -72,21 +72,22 @@
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/kpd1" />
 
             <ImageView
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@drawable/kpj2" />
 
         </LinearLayout>
 
         <ImageView
+            android:paddingTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/banner" />
 
     </LinearLayout>
 
