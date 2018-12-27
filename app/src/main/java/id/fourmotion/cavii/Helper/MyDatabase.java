@@ -73,14 +73,13 @@ public class MyDatabase extends SQLiteAssetHelper {
 
     private ArrayList<String> id = new ArrayList<>();
 
-    public void setId (String Id){
+    public void setId(String Id) {
         id.add(Id);
     }
 
-    public  String getId (int position){
+    public String getId(int position) {
         return id.get(position);
     }
-
 
 
     public ArrayList<Content> getSearchKonveksi(String jenis, String bahan) {
@@ -130,7 +129,7 @@ public class MyDatabase extends SQLiteAssetHelper {
         return contentArrayList;
     }
 
-
+    //-----------
     public Content getDetailKonveksi(String id) {
 
         Content contentList;
@@ -142,11 +141,10 @@ public class MyDatabase extends SQLiteAssetHelper {
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
 
-        contentList = new Content("","","","","","","","","");
+        contentList = new Content("", "tes", "", "", "", "", "", "", "");
 
         try {
             String[] searchParams = new String[]{id};
-
 
 
             Cursor c = db.rawQuery(qSelect, searchParams);
@@ -170,11 +168,9 @@ public class MyDatabase extends SQLiteAssetHelper {
 
             return contentList;
 
-        }catch ( Exception e){
+        } catch (Exception e) {
             Log.d("Cinta buta", "" + e);
         }
         return contentList;
     }
-    //
-
 }
