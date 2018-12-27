@@ -73,7 +73,7 @@
 
                     <!-- Teks deskripsi jenis -->
                     <TextView
-                        android:id="@+id/txt_jenis"
+                        android:id="@+id/txt_jenis_detail"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:background="@drawable/textbox_custom_border"

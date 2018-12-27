@@ -18,7 +18,7 @@ import id.fourmotion.cavii.Model.Content;
 public class DetailContent extends AppCompatActivity {
 
     String dataEkstra;
-    private Content dataList;
+    private Content dataList = new Content("","","aaa","","","","","","");
     MyDatabase db;
 
     @Override
@@ -26,18 +26,21 @@ public class DetailContent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_content);
 
+        db = new MyDatabase(this);
+
         try {
 
-            dataEkstra = getIntent().getStringExtra("trans_ID()");
+            //dataEkstra = getIntent().getStringExtra("trans_ID()");
 
-            dataList = db.getDetailKonveksi(dataEkstra);
+            //dataList
 
-            ContentData anu = new ContentData();
+            dataList = db.getDetailKonveksi("3");
 
-            anu.setContenData();
+            TextView text = findViewById(R.id.txt_jenis_detail);
+            text.setText(dataList.getJenis());
 
         } catch (Exception e) {
-            Toast.makeText(this, "Terima: " + dataEkstra, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Terima: " + dataList.getJenis(), Toast.LENGTH_SHORT).show();
             Log.d("Rusak",e.toString());
         }
 
@@ -55,14 +58,15 @@ public class DetailContent extends AppCompatActivity {
 
     }*/
 
-    public class ContentData {
+    /*
+        public class ContentData {
         private TextView txtJudul, txtJenis, txtBahan, txtHarga, txtDesc;
         private ImageView imgPath;
         private ImageButton btnPhone, btnWA, btnLoc;
 
         public ContentData() {
             txtJudul = findViewById(R.id.txt_judul_konveksi);
-            txtJenis = findViewById(R.id.txt_jenis);
+            txtJenis = findViewById(R.id.txt_jenis_detail);
             txtBahan = findViewById(R.id.txt_bahan);
             txtDesc = findViewById(R.id.txt_desc);
             txtHarga = findViewById(R.id.txt_harga);
@@ -72,10 +76,10 @@ public class DetailContent extends AppCompatActivity {
             btnLoc = findViewById(R.id.tombol_maps);
         }
 
-        public void setContenData() {
-            txtJenis.setText(dataList.getJudul());
+        public void setContentData() {
+            txtJenis.setText(dataList.getJenis());
         }
     }
-
+*/
 
 }

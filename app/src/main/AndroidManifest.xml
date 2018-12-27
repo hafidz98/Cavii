@@ -19,11 +19,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 
@@ -37,6 +33,12 @@
         <activity android:name=".DetailContent"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeUtama">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
 
         </activity>

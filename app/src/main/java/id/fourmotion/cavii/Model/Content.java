@@ -67,7 +67,7 @@ public class Content {
         this._id = _id;
     }
 
-    /*
+
     public void setJudul(String judul) {
         this.judul = judul;
     }
@@ -75,7 +75,7 @@ public class Content {
     public void setJenis(String jenis) {
         this.jenis = jenis;
     }
-
+/*
     public void setBahan(String bahan) {
         this.bahan = bahan;
     }
@@ -88,4 +88,6 @@ public class Content {
         this.imgPath = imgPath;
     }
     */
+
+
 }

@@ -50,6 +50,7 @@ public class ListContent extends AppCompatActivity {
 
         String forJenis, forBahan;
 
+
         if (dataEkstra.get(1) == null) {
             forJenis = "Jenis Baju: Semua Jenis";
         } else {
@@ -68,6 +69,8 @@ public class ListContent extends AppCompatActivity {
         db = new MyDatabase(this);
 
         recyclerView = findViewById(R.id.rv_content);
+
+
         if (dataEkstra.get(0) == null || dataEkstra.get(0).length() < 1) {
             try {
                 defaultData();
@@ -82,6 +85,7 @@ public class ListContent extends AppCompatActivity {
             //pake search view
             //adapter = new ContentAdapter(db.getSearchView(dataEkstra.get(0)));
         }
+
 
         //show data from database
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
