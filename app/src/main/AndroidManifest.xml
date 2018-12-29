@@ -34,22 +34,17 @@
             android:screenOrientation="portrait"
             android:theme="@style/ThemeUtama">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
-
         </activity>
 
         <!-- Bagian activity menampilkan pencarian -->
         <activity android:name=".ListContent"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeUtama">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>

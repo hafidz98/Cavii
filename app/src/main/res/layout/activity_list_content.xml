@@ -18,21 +18,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/jenis_filter"
+            <SearchView
+                android:id="@+id/search_engine"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/textview_custom_border" />
+                android:background="@color/backgroundColorWhite"
+                android:focusable="false"
+                android:iconifiedByDefault="false"
+                android:queryHint="Cari konveksi disini" />
 
-            <TextView
-                android:id="@+id/bahan_filter"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/textview_custom_border" />
 
-            <!--
             <Spinner
                 android:id="@+id/jenis_filter"
                 android:layout_width="match_parent"
@@ -40,13 +36,14 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/spinner_custom_border" />
 
+
             <Spinner
                 android:id="@+id/bahan_filter"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/spinner_custom_border" />
-                -->
+
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
@@ -54,10 +51,10 @@
     <!-- Bagian tampilan bawah -->
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:scrollbars="none"
         android:layout_height="match_parent"
         android:paddingStart="5dp"
-        android:paddingEnd="5dp">
+        android:paddingEnd="5dp"
+        android:scrollbars="none">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_content"
