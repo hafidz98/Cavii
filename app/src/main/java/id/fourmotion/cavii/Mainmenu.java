@@ -28,28 +28,31 @@ public class Mainmenu extends AppCompatActivity {
         final ImageButton aboutButton = findViewById(R.id.menu_about);
 
         homeButton.setSelected(true);
+        cariButton.setSelected(false);
+        favButton.setSelected(false);
+        aboutButton.setSelected(false);
 
         cariButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeButton.setSelected(false);
                 startActivity(new Intent(Mainmenu.this, ListContent.class));
+                overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
             }
         });
 
         favButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeButton.setSelected(false);
                 startActivity(new Intent(Mainmenu.this, MenuFav.class));
+                overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
             }
         });
 
         aboutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                homeButton.setSelected(false);
                 startActivity(new Intent(Mainmenu.this, MenuAbout.class));
+                overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
             }
         });
 
