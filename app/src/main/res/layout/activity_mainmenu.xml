@@ -4,47 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
+    android:baselineAligned="false"
     android:orientation="vertical"
     tools:context=".Mainmenu">
 
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"></LinearLayout>
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:orientation="horizontal">
 
         <!--Menu Home-->
         <ImageButton
             android:id="@+id/menu_home"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/selector_click" />
+            android:layout_weight="1"
+            android:background="@drawable/selector_click"
+            android:src="@mipmap/ic_cavii_home"/>
 
         <!--Menu Pencarian-->
         <ImageButton
             android:id="@+id/menu_cari"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@drawable/selector_click" />
+            android:layout_weight="1"
+            android:background="@drawable/selector_click"
+            android:src="@mipmap/ic_cavii_search"/>
 
         <!--Menu Favorit-->
         <ImageButton
             android:id="@+id/menu_fav"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_cavii_fav"
             android:background="@drawable/selector_click" />
+
         <!--Menu About-->
         <ImageButton
             android:id="@+id/menu_about"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_cavii_info"
             android:background="@drawable/selector_click" />
-
     </LinearLayout>
+
 </LinearLayout>
