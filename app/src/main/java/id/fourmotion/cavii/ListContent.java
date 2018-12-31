@@ -3,6 +3,7 @@ package id.fourmotion.cavii;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -202,7 +203,6 @@ public class ListContent extends AppCompatActivity {
                 //Send Intent
                 Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
                 toDetailContent.putExtra("trans_ID()", db.getId(position));
-
                 startActivity(toDetailContent);
             }
 
@@ -228,6 +228,13 @@ public class ListContent extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity();
+        Toast.makeText(ListContent.this, "Keluar", Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finishAffinity();
+                finish();
+            }
+        }, 1000);
     }
 }

@@ -1,6 +1,7 @@
 package id.fourmotion.cavii;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,6 +65,14 @@ public class Mainmenu extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finishAffinity();
+        super.onBackPressed();
+        Toast.makeText(Mainmenu.this, "Keluar", Toast.LENGTH_LONG).show();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finishAffinity();
+                finish();
+            }
+        }, 1000);
     }
 }

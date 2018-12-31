@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"></LinearLayout>
+        android:layout_weight="8" ></LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:id="@+id/menu_cari"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/selector_click" />
+            android:background="@drawable/selector_click"/>
 
         <!--Menu Favorit-->
         <ImageButton
@@ -45,6 +45,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/selector_click" />
-
     </LinearLayout>
 </LinearLayout>
