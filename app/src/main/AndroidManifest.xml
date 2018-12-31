@@ -3,7 +3,7 @@
     package="id.fourmotion.cavii">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -18,28 +18,6 @@
             android:name=".Splashscreen"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
-
-
-
-        </activity>
-
-        <!-- Bagian menu utama -->
-        <activity
-            android:name=".Mainmenu"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama"/>
-
-        <!-- Bagian detail dari hasil pencarian -->
-        <activity android:name=".DetailContent"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama">
-
-        </activity>
-
-        <!-- Bagian activity menampilkan pencarian -->
-        <activity android:name=".ListContent"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,6 +25,26 @@
             </intent-filter>
         </activity>
 
+
+        <!-- Bagian menu utama -->
+        <activity
+            android:name=".Mainmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama" />
+
+        <!-- Bagian detail dari hasil pencarian -->
+        <activity
+            android:name=".DetailContent"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama" />
+
+        <!-- Bagian activity menampilkan pencarian -->
+        <activity
+            android:name=".ListContent"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"></activity>
+        <activity android:name=".MenuFav" />
+        <activity android:name=".MenuAbout"></activity>
     </application>
 
 </manifest>

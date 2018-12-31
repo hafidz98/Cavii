@@ -7,88 +7,44 @@
     android:orientation="vertical"
     tools:context=".Mainmenu">
 
-    <!-- NOTE: baru tampilan doang, pas di klik belom apa2 :v -->
 
-    <!-- Ini adalah baris linear layout untuk search  -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="8"></LinearLayout>
 
-        <SearchView
-            android:id="@+id/search_engine"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/backgroundColorWhite"
-            android:iconifiedByDefault="false"
-            android:focusable="false"
-            android:queryHint="Cari konveksi disini" />
-
-
-        <Spinner
-            android:id="@+id/jenis_filter"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/spinner_custom_border" />
-
-
-        <Spinner
-            android:id="@+id/bahan_filter"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:background="@drawable/spinner_custom_border" />
-
-
-        <Button
-            android:onClick="cari"
-            android:id="@+id/tombolcari"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/btnSearchText"
-            android:textSize="20sp" />
-
-    </LinearLayout>
-
-    <!-- Linear Layout untuk item icon entah :v -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
+        <!--Menu Home-->
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:weightSum="2"
-            android:orientation="horizontal">
-
-
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/kpd1" />
-
-            <ImageView
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/kpj2" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:paddingTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:background="@color/colorPrimary"></LinearLayout>
+        <!--Menu Pencarian-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/banner" />
-
+            android:background="@drawable/selector_click"
+            android:onClick="menuCari"></LinearLayout>
+        <!--Menu Favorit-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_click"
+            android:onClick="menuFav"></LinearLayout>
+        <!--Menu About-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_click"
+            android:onClick="menuAbout"></LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

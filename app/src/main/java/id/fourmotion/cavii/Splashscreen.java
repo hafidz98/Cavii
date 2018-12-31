@@ -24,6 +24,7 @@ public class Splashscreen extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(Splashscreen.this, Mainmenu.class));
+                overridePendingTransition(R.anim.anim_out_left, R.anim.anim_in_opacity);
                 finish();
             }
         }, 1000 * second);
