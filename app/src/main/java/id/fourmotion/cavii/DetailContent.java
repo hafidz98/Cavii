@@ -9,8 +9,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,10 +18,6 @@ import android.widget.Toast;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-
-import id.fourmotion.cavii.Helper.MyDatabase;
-import id.fourmotion.cavii.Model.Content;
 
 public class DetailContent extends AppCompatActivity {
 
@@ -67,7 +61,7 @@ public class DetailContent extends AppCompatActivity {
                     startActivity(whatsapp);
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Install atau update aplikasi WhatsApp Anda", Toast.LENGTH_SHORT).show();
         }
         try {
@@ -110,40 +104,47 @@ public class DetailContent extends AppCompatActivity {
                     "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                     "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
 
-            try {
-                String[] searchParams = new String[]{id};
+            //try {
+            String[] searchParams = new String[]{id};
+
+            Cursor c = db.rawQuery(qSelect, searchParams);
+            c.moveToFirst();
+
+            setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
+
+            txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
+            txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
+            txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
+            txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
+            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
+            Bitmap bitmap = BitmapFactory.decodeStream(stream);
+            imgPath.setImageBitmap(bitmap);
+            txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
+            phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
+            location = c.getString(c.getColumnIndex(sqlSelect[8]));
+
+            //Set button
 
 
-                Cursor c = db.rawQuery(qSelect, searchParams);
-                c.moveToFirst();
-
-                txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
-                txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
-                txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
-                txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
-                InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                imgPath.setImageBitmap(bitmap);
-                txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
-                phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
-                location = c.getString(c.getColumnIndex(sqlSelect[8]));
-
-                //Set button
-
-
-                //contentList = new ArrayList<>();
-                c.close();
-            } catch (Exception e) {
-                Log.d("Error gan", "" + e);
-            }
+            //contentList = new ArrayList<>();
+            c.close();
+            //} catch (Exception e) {
+            //    Log.d("Errorgan", "" + e);
+            //}
         }
 
-        public String getPhoneData() {
+        String getPhoneData() {
             return phoneNumber;
         }
 
-        public String getLocation() {
+        String getLocation() {
             return location;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
     }
 }

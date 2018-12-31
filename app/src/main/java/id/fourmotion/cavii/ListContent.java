@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -38,6 +39,16 @@ public class ListContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_content);
+
+        //Button
+        ImageButton homeButton = findViewById(R.id.menu_home);
+        ImageButton cariButton = findViewById(R.id.menu_cari);
+        ImageButton favButton = findViewById(R.id.menu_fav);
+        ImageButton aboutButton = findViewById(R.id.menu_about);
+        homeButton.setSelected(false);
+        cariButton.setSelected(true);
+        favButton.setSelected(false);
+        aboutButton.setSelected(false);
 
         //ActionBar
         ActionBar actionBar = getSupportActionBar();
@@ -204,6 +215,7 @@ public class ListContent extends AppCompatActivity {
                 Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
                 toDetailContent.putExtra("trans_ID()", db.getId(position));
                 startActivity(toDetailContent);
+                overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
             }
 
             @Override
@@ -236,5 +248,23 @@ public class ListContent extends AppCompatActivity {
                 finish();
             }
         }, 1000);
+    }
+
+    public void menuHome(View view) {
+        startActivity(new Intent(ListContent.this, Mainmenu.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+    }
+
+    public void menuCari(View view) {
+    }
+
+    public void menuFav(View view) {
+        startActivity(new Intent(ListContent.this, MenuFav.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+    }
+
+    public void menuAbout(View view) {
+        startActivity(new Intent(ListContent.this, MenuAbout.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
     }
 }
