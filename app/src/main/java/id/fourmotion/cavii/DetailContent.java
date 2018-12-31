@@ -19,6 +19,8 @@ import android.widget.Toast;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.InputStream;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class DetailContent extends AppCompatActivity {
 
@@ -117,8 +119,10 @@ public class DetailContent extends AppCompatActivity {
             //txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
             txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
             txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
-            txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
-
+            //txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+            txtHarga.setText(formatRupiah.format((double)c.getDouble(c.getColumnIndex(sqlSelect[4]))));
             InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
             imgPath.setImageBitmap(bitmap);
