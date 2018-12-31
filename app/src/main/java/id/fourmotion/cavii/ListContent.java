@@ -171,7 +171,7 @@ public class ListContent extends AppCompatActivity {
         });
     }
 
-    void tampilData(){
+    void tampilData() {
         recyclerView = findViewById(R.id.rv_content);
 
 
@@ -223,5 +223,11 @@ public class ListContent extends AppCompatActivity {
         void onClick(View view, int position);
 
         void onLongClick(View view, int position);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
     }
 }

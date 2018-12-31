@@ -24,8 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <!-- Bagian menu utama -->
         <activity
             android:name=".Mainmenu"
@@ -43,8 +41,14 @@
             android:name=".ListContent"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeUtama"></activity>
-        <activity android:name=".MenuFav" />
-        <activity android:name=".MenuAbout"></activity>
+        <activity
+            android:name=".MenuFav"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama" />
+        <activity
+            android:name=".MenuAbout"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"></activity>
     </application>
 
 </manifest>
