@@ -1,8 +1,12 @@
 package id.fourmotion.cavii;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,7 @@ import android.widget.Toast;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import id.fourmotion.cavii.Helper.MyDatabase;
@@ -30,49 +35,61 @@ public class DetailContent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_content);
-        /*
-        //db = new MyDatabase(this);
+
+        final ContentData data = new ContentData(this);
+        String idData = getIntent().getStringExtra("trans_ID()");
+        data.setData(idData);
+
+        ImageButton tombolKontak = findViewById(R.id.tombol_kontak);
+        ImageButton tombolWA = findViewById(R.id.tombol_wa);
+        ImageButton tombolPeta = findViewById(R.id.tombol_maps);
 
         try {
-
-            //dataEkstra = getIntent().getStringExtra("trans_ID()");
-
-            //dataList
-
-            //dataList = db.getDetailKonveksi("3");
-
-            //TextView text = findViewById(R.id.txt_jenis_detail);
-            //text.setText(dataList.getJenis());
-
-        } catch (Exception e) {
-            //Toast.makeText(this, "Terima: " + dataList.getJenis(), Toast.LENGTH_SHORT).show();
-            //Log.d("Rusak", e.toString());
+            tombolPeta.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri peta = Uri.parse("google.navigation:q=" + data.getLocation());
+                    Intent map = new Intent(Intent.ACTION_VIEW, peta);
+                    map.setPackage("com.google.android.apps.maps");
+                    startActivity(map);
+                }
+            });
+        } catch (Exception E) {
+            Toast.makeText(this, "Install atau update Google Maps Anda", Toast.LENGTH_SHORT).show();
         }
-
-
-        db.getDetailKonveksi("1");
-
-        ContentData anu = new ContentData();
-        anu.setContenData();
-        */
-
-        ContentData data = new ContentData(this);
-        data.setData("1");
+        try {
+            tombolWA.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri WA = Uri.parse("smsto:" + data.getPhoneData());
+                    Intent whatsapp = new Intent(Intent.ACTION_SENDTO, WA);
+                    whatsapp.setPackage("com.whatsapp");
+                    startActivity(whatsapp);
+                }
+            });
+        } catch (Exception e){
+            Toast.makeText(this, "Install atau update aplikasi WhatsApp Anda", Toast.LENGTH_SHORT).show();
+        }
+        try {
+            tombolKontak.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri dial = Uri.parse("tel:" + data.getPhoneData());
+                    Intent panggil = new Intent(Intent.ACTION_DIAL, dial);
+                    startActivity(panggil);
+                }
+            });
+        } catch (Exception e) {
+            Toast.makeText(this, "Aktifkan perizinan kontak untuk mengakses fitur ini", Toast.LENGTH_LONG).show();
+        }
     }
-
-    /*
-    public void onViewHolder(ContentData holder, int position){
-        holder.txtJudul.setText(dataList.get(position).getJudul());
-
-    }*/
-
 
     public class ContentData extends SQLiteAssetHelper {
         private TextView txtJudul, txtJenis, txtBahan, txtHarga, txtDesc;
         private ImageView imgPath;
-        private ImageButton btnPhone, btnWA, btnLoc;
         private static final String DATABASE_NAME = "db_cavii_v1.db";
         private static final int DATABASE_VERSION = 1;
+        String phoneNumber, location;
 
         public ContentData(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -82,19 +99,7 @@ public class DetailContent extends AppCompatActivity {
             txtDesc = findViewById(R.id.txt_desc);
             txtHarga = findViewById(R.id.txt_harga);
             imgPath = findViewById(R.id.img_konveksi);
-            btnPhone = findViewById(R.id.tombol_kontak);
-            btnWA = findViewById(R.id.tombol_wa);
-            btnLoc = findViewById(R.id.tombol_maps);
         }
-
-        /*
-        public void setContentData(Context konteks, String id) {
-            konten = new MyDatabase(konteks).getDetailKonveksi(id);
-            txtJudul.setText(konten.getJudul());
-            //txtJenis.setText(konten.getJenis());
-            //txtBahan.setText(konten.getBahan());
-        }
-        */
 
         public void setData(String id) {
             SQLiteDatabase db = getWritableDatabase();
@@ -112,13 +117,33 @@ public class DetailContent extends AppCompatActivity {
                 Cursor c = db.rawQuery(qSelect, searchParams);
                 c.moveToFirst();
 
+                txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
                 txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
+                txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
+                txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
+                InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
+                Bitmap bitmap = BitmapFactory.decodeStream(stream);
+                imgPath.setImageBitmap(bitmap);
+                txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
+                phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
+                location = c.getString(c.getColumnIndex(sqlSelect[8]));
+
+                //Set button
+
 
                 //contentList = new ArrayList<>();
                 c.close();
             } catch (Exception e) {
                 Log.d("Error gan", "" + e);
             }
+        }
+
+        public String getPhoneData() {
+            return phoneNumber;
+        }
+
+        public String getLocation() {
+            return location;
         }
     }
 }
