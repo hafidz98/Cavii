@@ -10,4 +10,5 @@
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
     <color name="colorBorder">#f2f2f2</color>
+    <color name="colorRed">#E91E63</color>
 </resources>
