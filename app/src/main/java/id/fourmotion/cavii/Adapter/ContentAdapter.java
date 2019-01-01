@@ -46,7 +46,6 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     public void onBindViewHolder(ContentViewHolder holder, int position) {
         holder.txtJudul.setText(dataList.get(position).getJudul());
         holder.txtJenis.setText(dataList.get(position).getJenis());
-        holder.txtBahan.setText(dataList.get(position).getBahan());
         holder.txtHarga.setText(dataList.get(position).getHarga());
         Locale localeID = new Locale("in", "ID");
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
@@ -55,6 +54,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         Bitmap bitmap = BitmapFactory.decodeStream(stream);
         holder.imgPath.setImageBitmap(bitmap);
         //holder.imgPath.getDrawable();
+        holder.txtAlamat.setText(dataList.get(position).getAlamat());
 
     }
 
@@ -63,16 +63,17 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     }
 
     public class ContentViewHolder extends RecyclerView.ViewHolder {
-        private TextView txtJudul, txtJenis, txtBahan, txtHarga;
+        private TextView txtJudul, txtJenis, txtHarga, txtAlamat;
         private ImageView imgPath;
 
         public ContentViewHolder(View itemView) {
             super(itemView);
             txtJudul = itemView.findViewById(R.id.txt_judul_konveksi);
             txtJenis = itemView.findViewById(R.id.txt_jenis);
-            txtBahan = itemView.findViewById(R.id.txt_bahan);
             txtHarga = itemView.findViewById(R.id.txt_harga);
             imgPath = itemView.findViewById(R.id.img_konveksi);
+            txtAlamat = itemView.findViewById(R.id.txt_alamat);
+
         }
     }
 
