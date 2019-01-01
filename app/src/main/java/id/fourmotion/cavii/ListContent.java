@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -165,8 +166,8 @@ public class ListContent extends AppCompatActivity {
         searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                tampilData();
                 inputSearch = s;
+                tampilData();
                 return false;
             }
 
@@ -182,12 +183,14 @@ public class ListContent extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_content);
         try {
             //adapter.setContext(ListContent.this);
+            db = new MyDatabase(ListContent.this);
             adapter = new ContentAdapter(db.getSearchKonveksi(inputSearch, selectedItemJenis, selectedItemBahan));
 
         } catch (Exception e) {
             //Data tidak ditemukan
             Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
             defaultData();
+            db.refreshId();
         }
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
@@ -199,14 +202,12 @@ public class ListContent extends AppCompatActivity {
             public void onClick(View view, int position) {
                 //Send Intent
                 try {
-                    if (db.getId(position) != null) {
-                        Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
-                        toDetailContent.putExtra("trans_ID()", db.getId(position));
-                        startActivity(toDetailContent);
-                        overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
-                    }
-                }catch (Exception e){
-
+                    Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
+                    toDetailContent.putExtra("trans_ID()", db.getId(position));
+                    Toast.makeText(ListContent.this, db.getId(position), Toast.LENGTH_SHORT).show();
+                    startActivity(toDetailContent);
+                    overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
+                } catch (Exception e) {
                 }
             }
 
@@ -214,9 +215,6 @@ public class ListContent extends AppCompatActivity {
             public void onLongClick(View view, int position) {
             }
         }));
-
-        //show data from database
-
     }
 
     void defaultData() {
@@ -235,6 +233,7 @@ public class ListContent extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        finish();
         overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
     }
 
