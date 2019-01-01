@@ -21,6 +21,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 
 import id.fourmotion.cavii.Adapter.ContentAdapter;
@@ -183,29 +184,41 @@ public class ListContent extends AppCompatActivity {
             //adapter.setContext(ListContent.this);
             adapter = new ContentAdapter(db.getSearchKonveksi(inputSearch, selectedItemJenis, selectedItemBahan));
 
-            //show data from database
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setAdapter(adapter);
-            //Click item in recycler view
-            recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
-                @Override
-                public void onClick(View view, int position) {
-                    //Send Intent
+        } catch (Exception e) {
+            //Data tidak ditemukan
+            Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
+            defaultData();
+        }
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        //Click item in recycler view
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                //Send Intent
+                if (db.getId(position) != null || db.getId(position).length() < 1) {
                     Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
                     toDetailContent.putExtra("trans_ID()", db.getId(position));
                     startActivity(toDetailContent);
                     overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
                 }
+            }
 
-                @Override
-                public void onLongClick(View view, int position) {
-                }
-            }));
-        } catch (Exception e) {
-            //Data tidak ditemukan
-            Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
-        }
+            @Override
+            public void onLongClick(View view, int position) {
+            }
+        }));
+
+        //show data from database
+
+    }
+
+    void defaultData() {
+        contentArrayList = new ArrayList<>();
+        contentArrayList.add(new Content("", "", "", "", "", "", "", "", "", "", ""));
+        adapter = new ContentAdapter(contentArrayList);
     }
 
     //interface for recycleView

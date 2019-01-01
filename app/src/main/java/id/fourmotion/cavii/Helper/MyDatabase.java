@@ -108,10 +108,9 @@ public class MyDatabase extends SQLiteAssetHelper {
         contentArrayList = new ArrayList<>();
 
         try {
-            //dbBahan.add("Pilih Bahan Baju: ");
-
-            //Toast.makeText(MyDatabase.this, "jjj", Toast.LENGTH_SHORT).show();
             do {
+
+
                 contentArrayList.add(new Content(
                         c.getString(c.getColumnIndex(sqlSelect[0])),
                         c.getString(c.getColumnIndex(sqlSelect[1])),

@@ -44,7 +44,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     }
 
     @Override
-    public void onBindViewHolder(ContentViewHolder holder, int position) {
+    public void onBindViewHolder(final ContentViewHolder holder, int position) {
         holder.txtJudul.setText(dataList.get(position).getJudul());
         holder.txtJenis.setText(dataList.get(position).getJenis());
         holder.txtHarga.setText(dataList.get(position).getHarga());
@@ -53,7 +53,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         try {
             holder.txtHarga.setText(formatRupiah.format(Double.parseDouble(dataList.get(position).getHarga())));
         } catch (Exception e){
-            //no string error
+            //Error: null string
         }
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + dataList.get(position).getImgPath());
         Bitmap bitmap = BitmapFactory.decodeStream(stream);
@@ -61,6 +61,17 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         //holder.imgPath.getDrawable();
         holder.txtAlamat.setText(dataList.get(position).getAlamat());
         holder.tombol_favorit.setSelected(dataList.get(position).getFav());
+
+        holder.tombol_favorit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (holder.tombol_favorit.isSelected()){
+                    holder.tombol_favorit.setSelected(false);
+                } else {
+                    holder.tombol_favorit.setSelected(true);
+                }
+            }
+        });
     }
 
     public int getItemCount() {

@@ -25,13 +25,12 @@ public class Content {
         this.phone = phone;
         this.location = location;
         this.alamat = alamat;
-        if (favorit.equalsIgnoreCase("true")){
+        if (favorit.equalsIgnoreCase("true")) {
             this.favorit = true;
-        } else {
+        } else if (favorit.equalsIgnoreCase("false")) {
             this.favorit = false;
         }
     }
-
 
     // Getter
     public String get_id() {
