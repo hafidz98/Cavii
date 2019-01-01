@@ -11,8 +11,9 @@ public class Content {
     private String desc;
     private String phone;
     private String location;
+    private String alamat;
 
-    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath, String desc, String phone, String location) {
+    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath, String desc, String phone, String location, String alamat) {
         this._id = _id;
         this.judul = judul;
         this.jenis = jenis;
@@ -22,6 +23,7 @@ public class Content {
         this.desc = desc;
         this.phone = phone;
         this.location = location;
+        this.alamat = alamat;
     }
 
 
@@ -60,6 +62,10 @@ public class Content {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getAlamat() {
+        return alamat;
     }
 
     // Setter
