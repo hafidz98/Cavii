@@ -81,9 +81,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
+                                      <entry key="assetType" value="IMAGE" />
                                       <entry key="cropped" value="true" />
                                       <entry key="iconShape" value="NONE" />
-                                      <entry key="outputName" value="ic_cavii_info" />
+                                      <entry key="imageAsset" value="X:\Documents\Kuliah\Universitas Teknokrat Indonesia\Mata Kuliah\Pemrograman Mobile\Exmatek 2 - Mobile Divison\drop_down.png" />
+                                      <entry key="outputName" value="dropdown_blue" />
                                     </map>
                                   </option>
                                 </PersistentState>
