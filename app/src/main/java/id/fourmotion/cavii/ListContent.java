@@ -41,14 +41,8 @@ public class ListContent extends AppCompatActivity {
         setContentView(R.layout.activity_list_content);
 
         //Button
-        ImageButton homeButton = findViewById(R.id.menu_home);
         ImageButton cariButton = findViewById(R.id.menu_cari);
-        ImageButton favButton = findViewById(R.id.menu_fav);
-        ImageButton aboutButton = findViewById(R.id.menu_about);
-        homeButton.setSelected(false);
         cariButton.setSelected(true);
-        favButton.setSelected(false);
-        aboutButton.setSelected(false);
 
         //ActionBar
         ActionBar actionBar = getSupportActionBar();
