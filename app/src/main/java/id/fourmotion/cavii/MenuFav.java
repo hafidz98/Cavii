@@ -20,6 +20,12 @@ public class MenuFav extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
+    }
+
     public void menuHome(View view) {
         startActivity(new Intent(MenuFav.this, Mainmenu.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);

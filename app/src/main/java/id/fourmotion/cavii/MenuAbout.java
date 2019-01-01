@@ -19,6 +19,12 @@ public class MenuAbout extends AppCompatActivity {
         aboutButton.setSelected(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
+    }
+
     public void menuHome(View view) {
         startActivity(new Intent(MenuAbout.this, Mainmenu.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);

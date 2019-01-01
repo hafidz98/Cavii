@@ -228,14 +228,7 @@ public class ListContent extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Toast.makeText(ListContent.this, "Keluar", Toast.LENGTH_LONG).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finishAffinity();
-                finish();
-            }
-        }, 1000);
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
     }
 
     public void menuHome(View view) {

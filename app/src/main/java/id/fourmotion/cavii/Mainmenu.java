@@ -1,6 +1,8 @@
 package id.fourmotion.cavii;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -43,22 +45,21 @@ public class Mainmenu extends AppCompatActivity {
 
         // -----------Final data to send via intent-------
         ContentData contentData = new ContentData(this);
-        int random = new Random().nextInt(contentData.getSize()-1) + 1;
-        contentData.setData(String.valueOf(random));
+        contentData.setData(String.valueOf(new Random().nextInt(contentData.getSize()-1) + 1));
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        super.onBackPressed();
-        Toast.makeText(Mainmenu.this, "Keluar", Toast.LENGTH_LONG).show();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finishAffinity();
-                finish();
-            }
-        }, 1000);
+        new AlertDialog.Builder(this)
+                .setMessage("Apakah Anda yakin ingin keluar?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Mainmenu.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("Tidak", null)
+                .show();
     }
 
     private class ContentData extends SQLiteAssetHelper {
