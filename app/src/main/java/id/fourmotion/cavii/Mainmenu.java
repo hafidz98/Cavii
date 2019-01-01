@@ -114,8 +114,6 @@ public class Mainmenu extends AppCompatActivity {
             location = c.getString(c.getColumnIndex(sqlSelect[8]));
 
             //Set button
-
-
             //contentList = new ArrayList<>();
             c.close();
             //} catch (Exception e) {
