@@ -14,7 +14,7 @@ public class MenuFav extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menufav);
 
-        //Button
+        //Button//
         ImageButton favButton = findViewById(R.id.menu_fav);
         favButton.setSelected(true);
 
