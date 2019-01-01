@@ -15,14 +15,7 @@ public class MenuAbout extends AppCompatActivity {
         setTitle("Tentang Kami");
 
         //Button
-        ImageButton homeButton = findViewById(R.id.menu_home);
-        ImageButton cariButton = findViewById(R.id.menu_cari);
-        ImageButton favButton = findViewById(R.id.menu_fav);
         ImageButton aboutButton = findViewById(R.id.menu_about);
-
-        homeButton.setSelected(false);
-        cariButton.setSelected(false);
-        favButton.setSelected(false);
         aboutButton.setSelected(true);
     }
 

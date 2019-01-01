@@ -24,13 +24,7 @@ public class Mainmenu extends AppCompatActivity {
 
         //Button
         ImageButton homeButton = findViewById(R.id.menu_home);
-        ImageButton cariButton = findViewById(R.id.menu_cari);
-        ImageButton favButton = findViewById(R.id.menu_fav);
-        ImageButton aboutButton = findViewById(R.id.menu_about);
         homeButton.setSelected(true);
-        cariButton.setSelected(false);
-        favButton.setSelected(false);
-        aboutButton.setSelected(false);
 
         // -----------Final data to send via intent-------
         MyDatabase db;

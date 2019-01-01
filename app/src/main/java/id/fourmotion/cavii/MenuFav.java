@@ -15,15 +15,9 @@ public class MenuFav extends AppCompatActivity {
         setContentView(R.layout.activity_menufav);
 
         //Button
-        ImageButton homeButton = findViewById(R.id.menu_home);
-        ImageButton cariButton = findViewById(R.id.menu_cari);
         ImageButton favButton = findViewById(R.id.menu_fav);
-        ImageButton aboutButton = findViewById(R.id.menu_about);
-
-        homeButton.setSelected(false);
-        cariButton.setSelected(false);
         favButton.setSelected(true);
-        aboutButton.setSelected(false);
+
     }
 
     public void menuHome(View view) {
