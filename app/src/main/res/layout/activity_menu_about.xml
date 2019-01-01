@@ -24,7 +24,6 @@
         android:orientation="horizontal">
 
         <!--Menu Home-->
-        <!--Menu Home-->
         <ImageButton
             android:id="@+id/menu_home"
             android:layout_width="0dp"
