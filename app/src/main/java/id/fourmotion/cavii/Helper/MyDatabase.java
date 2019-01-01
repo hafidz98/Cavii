@@ -93,7 +93,7 @@ public class MyDatabase extends SQLiteAssetHelper {
         qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin, cavii_konveksi.cav_address, cavii_trans.cav_fav FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
-                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_konveksi.cav_name LIKE ? OR(cavii_jenis.cav_jen_name LIKE ? AND cavii_bahan.cav_ba_name LIKE ?) ORDER BY cavii_trans.cav_cost ASC";
+                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_konveksi.cav_name LIKE ? OR (cavii_jenis.cav_jen_name LIKE ? AND cavii_bahan.cav_ba_name LIKE ?) ORDER BY cavii_trans.cav_cost ASC";
 
 
         String[] searchParams = new String[]{valueOf(cari) + "%", valueOf(jenis) + "%", valueOf(bahan) + "%"};
@@ -132,48 +132,4 @@ public class MyDatabase extends SQLiteAssetHelper {
     }
 
     //-----------
-    public Content getDetailKonveksi(String id) {
-
-        Content contentList;
-        SQLiteDatabase db = getWritableDatabase();
-        String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_desc", "cav_phone_number", "cav_location_pin", "cav_address"};
-
-        String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans " +
-                "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
-                "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
-                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
-
-        contentList = new Content("", "tes", "", "", "", "", "", "", "", "", null);
-
-        try {
-            String[] searchParams = new String[]{id};
-
-
-            Cursor c = db.rawQuery(qSelect, searchParams);
-            c.moveToFirst();
-
-            //contentList = new ArrayList<>();
-
-
-            contentList = new Content(
-                    c.getString(c.getColumnIndex(sqlSelect[0])),
-                    c.getString(c.getColumnIndex(sqlSelect[1])),
-                    c.getString(c.getColumnIndex(sqlSelect[2])),
-                    c.getString(c.getColumnIndex(sqlSelect[3])),
-                    c.getString(c.getColumnIndex(sqlSelect[4])),
-                    c.getString(c.getColumnIndex(sqlSelect[5])),
-                    c.getString(c.getColumnIndex(sqlSelect[6])),
-                    c.getString(c.getColumnIndex(sqlSelect[7])),
-                    c.getString(c.getColumnIndex(sqlSelect[8])),
-                    null,null);
-
-            c.close();
-
-            return contentList;
-
-        } catch (Exception e) {
-            Log.d("Cinta buta", "" + e);
-        }
-        return contentList;
-    }
 }
