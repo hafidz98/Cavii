@@ -11,13 +11,13 @@
     <!-- Bungkus banner -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="140dp"
         android:layout_gravity="top"
         android:orientation="vertical">
 
         <!-- Gambar disini -->
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
             android:src="@drawable/banner" />
@@ -25,10 +25,11 @@
     </LinearLayout><!-- Akhir Bungkus banner -->
 
     <!-- Bungkus konten -->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="7dp"
+        android:scrollbars="none"
         android:layout_weight="1">
 
         <!-- Bungkus dalam konten -->
@@ -56,19 +57,12 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
-                <!-- Teks Alamat Konveksi -->
-                <TextView
-                    android:id="@+id/home_content_alamat"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Ini sub teks" />
-
             </LinearLayout><!-- Akhir Bagian atas judul -->
 
             <!-- Bagian gambar content -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="220dp">
+                android:layout_height="200dp">
 
                 <!-- Gambar kontent disini -->
                 <ImageView
@@ -82,7 +76,7 @@
             <!-- Tulisan jenis dan harga-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:orientation="vertical">
@@ -105,16 +99,25 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="7dp"
                     android:paddingEnd="7dp"
-                    android:textColor="@color/colorRed"
                     android:text="Rp95.000"
+                    android:textColor="@color/colorRed"
+                    android:textSize="16sp" />
+
+                <!-- Teks Alamat Konveksi -->
+                <TextView
+                    android:id="@+id/home_content_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
                     android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:text="Ini sub teks" />
 
             </LinearLayout><!-- Akhir Tulisan jenis dan harga-->
 
         </LinearLayout><!-- Akhir Bungkus dalam konten -->
 
-    </LinearLayout><!-- Akhir Bungkus konten -->
+    </ScrollView><!-- Akhir Bungkus konten -->
 
     <!-- Bungkus tombol -->
     <LinearLayout
