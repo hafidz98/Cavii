@@ -23,39 +23,14 @@ public class Mainmenu extends AppCompatActivity {
         setContentView(R.layout.activity_mainmenu);
 
         //Button
-        final ImageButton homeButton = findViewById(R.id.menu_home);
-        final ImageButton cariButton = findViewById(R.id.menu_cari);
-        final ImageButton favButton = findViewById(R.id.menu_fav);
-        final ImageButton aboutButton = findViewById(R.id.menu_about);
-
+        ImageButton homeButton = findViewById(R.id.menu_home);
+        ImageButton cariButton = findViewById(R.id.menu_cari);
+        ImageButton favButton = findViewById(R.id.menu_fav);
+        ImageButton aboutButton = findViewById(R.id.menu_about);
         homeButton.setSelected(true);
         cariButton.setSelected(false);
         favButton.setSelected(false);
         aboutButton.setSelected(false);
-
-        cariButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Mainmenu.this, ListContent.class));
-                overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
-            }
-        });
-
-        favButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Mainmenu.this, MenuFav.class));
-                overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
-            }
-        });
-
-        aboutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Mainmenu.this, MenuAbout.class));
-                overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
-            }
-        });
 
         // -----------Final data to send via intent-------
         MyDatabase db;
@@ -74,5 +49,24 @@ public class Mainmenu extends AppCompatActivity {
                 finish();
             }
         }, 1000);
+    }
+
+
+    public void menuHome(View view) {
+    }
+
+    public void menuCari(View view) {
+        startActivity(new Intent(Mainmenu.this, ListContent.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+    }
+
+    public void menuFav(View view) {
+        startActivity(new Intent(Mainmenu.this, MenuFav.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+    }
+
+    public void menuAbout(View view) {
+        startActivity(new Intent(Mainmenu.this, MenuAbout.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
     }
 }

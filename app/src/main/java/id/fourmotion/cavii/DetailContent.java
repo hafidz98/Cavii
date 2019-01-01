@@ -6,11 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,10 +19,8 @@ import android.widget.Toast;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-
-import id.fourmotion.cavii.Helper.MyDatabase;
-import id.fourmotion.cavii.Model.Content;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class DetailContent extends AppCompatActivity {
 
@@ -67,7 +64,7 @@ public class DetailContent extends AppCompatActivity {
                     startActivity(whatsapp);
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             Toast.makeText(this, "Install atau update aplikasi WhatsApp Anda", Toast.LENGTH_SHORT).show();
         }
         try {
@@ -93,7 +90,7 @@ public class DetailContent extends AppCompatActivity {
 
         public ContentData(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-            txtJudul = findViewById(R.id.txt_judul_konveksi);
+            //txtJudul = findViewById(R.id.txt_judul_konveksi);
             txtJenis = findViewById(R.id.txt_jenis_detail);
             txtBahan = findViewById(R.id.txt_bahan);
             txtDesc = findViewById(R.id.txt_desc);
@@ -110,40 +107,59 @@ public class DetailContent extends AppCompatActivity {
                     "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                     "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
 
-            try {
-                String[] searchParams = new String[]{id};
+            //try {
+            String[] searchParams = new String[]{id};
+
+            Cursor c = db.rawQuery(qSelect, searchParams);
+            c.moveToFirst();
+
+            setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
 
 
-                Cursor c = db.rawQuery(qSelect, searchParams);
-                c.moveToFirst();
+            //txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
+            txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
+            txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
+            //txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+            txtHarga.setText(formatRupiah.format((double)c.getDouble(c.getColumnIndex(sqlSelect[4]))));
+            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
+            Bitmap bitmap = BitmapFactory.decodeStream(stream);
+            imgPath.setImageBitmap(bitmap);
+            /*try {
+                InputStream ims = getAssets().open(c.getString(c.getColumnIndex(sqlSelect[5])));
 
-                txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
-                txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
-                txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
-                txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
-                InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                imgPath.setImageBitmap(bitmap);
-                txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
-                phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
-                location = c.getString(c.getColumnIndex(sqlSelect[8]));
-
-                //Set button
-
-
-                //contentList = new ArrayList<>();
-                c.close();
+                Drawable d = Drawable.createFromStream(ims, null);
+                imgPath.setImageDrawable(d);
             } catch (Exception e) {
-                Log.d("Error gan", "" + e);
-            }
+                Toast.makeText(DetailContent.this, "" + e, Toast.LENGTH_SHORT).show();
+            }*/
+            txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
+            phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
+            location = c.getString(c.getColumnIndex(sqlSelect[8]));
+
+            //Set button
+
+
+            //contentList = new ArrayList<>();
+            c.close();
+            //} catch (Exception e) {
+            //    Log.d("Errorgan", "" + e);
+            //}
         }
 
-        public String getPhoneData() {
+        String getPhoneData() {
             return phoneNumber;
         }
 
-        public String getLocation() {
+        String getLocation() {
             return location;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
     }
 }

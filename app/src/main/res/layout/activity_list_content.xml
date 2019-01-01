@@ -81,7 +81,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/selector_click"
-            android:src="@mipmap/ic_cavii_home"/>
+            android:onClick="menuHome"
+            android:src="@mipmap/ic_cavii_home" />
 
         <!--Menu Pencarian-->
         <ImageButton
@@ -90,7 +91,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@drawable/selector_click"
-            android:src="@mipmap/ic_cavii_search"/>
+            android:onClick="menuCari"
+            android:src="@mipmap/ic_cavii_search" />
 
         <!--Menu Favorit-->
         <ImageButton
@@ -98,8 +100,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/ic_cavii_fav"
-            android:background="@drawable/selector_click" />
+            android:background="@drawable/selector_click"
+            android:onClick="menuFav"
+            android:src="@mipmap/ic_cavii_fav" />
 
         <!--Menu About-->
         <ImageButton
@@ -107,8 +110,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@mipmap/ic_cavii_info"
-            android:background="@drawable/selector_click" />
+            android:background="@drawable/selector_click"
+            android:onClick="menuAbout"
+            android:src="@mipmap/ic_cavii_info" />
     </LinearLayout>
 
 </LinearLayout>
