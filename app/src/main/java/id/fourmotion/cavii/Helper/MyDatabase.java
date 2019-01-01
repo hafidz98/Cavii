@@ -87,10 +87,10 @@ public class MyDatabase extends SQLiteAssetHelper {
         ArrayList<Content> contentArrayList;
         SQLiteDatabase db = getWritableDatabase();
 
-        String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin", "cav_address"};
+        String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin", "cav_address", "cav_fav"};
         String qSelect;
 
-        qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin, cavii_konveksi.cav_address FROM cavii_trans " +
+        qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin, cavii_konveksi.cav_address, cavii_trans.cav_fav FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_konveksi.cav_name LIKE ? OR(cavii_jenis.cav_jen_name LIKE ? AND cavii_bahan.cav_ba_name LIKE ?) ORDER BY cavii_trans.cav_cost ASC";
@@ -120,8 +120,9 @@ public class MyDatabase extends SQLiteAssetHelper {
                         c.getString(c.getColumnIndex(sqlSelect[4])),
                         c.getString(c.getColumnIndex(sqlSelect[5])),
                         "", "", "",
-                        c.getString(c.getColumnIndex(sqlSelect[8]))),
-                        c.getString(c.getColumnIndex(sqlSelect[9]))); //konten
+                        c.getString(c.getColumnIndex(sqlSelect[8])),
+                        c.getString(c.getColumnIndex(sqlSelect[9])))); //konten
+
                 setId(c.getString(c.getColumnIndex(sqlSelect[0])));
             } while (c.moveToNext());
         } finally {
@@ -142,7 +143,7 @@ public class MyDatabase extends SQLiteAssetHelper {
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
 
-        contentList = new Content("", "tes", "", "", "", "", "", "", "", "");
+        contentList = new Content("", "tes", "", "", "", "", "", "", "", "", null);
 
         try {
             String[] searchParams = new String[]{id};
@@ -164,7 +165,7 @@ public class MyDatabase extends SQLiteAssetHelper {
                     c.getString(c.getColumnIndex(sqlSelect[6])),
                     c.getString(c.getColumnIndex(sqlSelect[7])),
                     c.getString(c.getColumnIndex(sqlSelect[8])),
-                    null);
+                    null,null);
 
             c.close();
 
