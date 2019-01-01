@@ -88,7 +88,7 @@ public class Mainmenu extends AppCompatActivity {
 
             Cursor c = db.rawQuery(qSelect, searchParams);
             c.moveToFirst();
-
+//
             setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
 
             //txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
