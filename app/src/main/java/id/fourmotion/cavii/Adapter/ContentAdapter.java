@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,7 +56,6 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.imgPath.setImageBitmap(bitmap);
         //holder.imgPath.getDrawable();
         holder.txtAlamat.setText(dataList.get(position).getAlamat());
-
     }
 
     public int getItemCount() {
