@@ -47,7 +47,7 @@
             <!-- Bungkus teks bawah -->
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:orientation="vertical"
                 android:paddingTop="7dp"
@@ -96,7 +96,8 @@
                     android:id="@+id/tombol_fav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_cavii" />
+                    android:padding="20dp"
+                    android:src="@drawable/full_star_fav" />
             </LinearLayout>
 
         </LinearLayout>
