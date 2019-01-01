@@ -35,7 +35,7 @@
         <activity
             android:name=".DetailContent"
             android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama" />
+            android:theme="@style/ThemeUtama"/>
 
         <!-- Bagian activity menampilkan pencarian -->
         <activity

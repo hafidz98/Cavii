@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.InputStream;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class DetailContent extends AppCompatActivity {
 
@@ -87,7 +90,7 @@ public class DetailContent extends AppCompatActivity {
 
         public ContentData(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-            txtJudul = findViewById(R.id.txt_judul_konveksi);
+            //txtJudul = findViewById(R.id.txt_judul_konveksi);
             txtJenis = findViewById(R.id.txt_jenis_detail);
             txtBahan = findViewById(R.id.txt_bahan);
             txtDesc = findViewById(R.id.txt_desc);
@@ -112,13 +115,25 @@ public class DetailContent extends AppCompatActivity {
 
             setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
 
-            txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
+
+            //txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
             txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
             txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
-            txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
+            //txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+            txtHarga.setText(formatRupiah.format((double)c.getDouble(c.getColumnIndex(sqlSelect[4]))));
             InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
             imgPath.setImageBitmap(bitmap);
+            /*try {
+                InputStream ims = getAssets().open(c.getString(c.getColumnIndex(sqlSelect[5])));
+
+                Drawable d = Drawable.createFromStream(ims, null);
+                imgPath.setImageDrawable(d);
+            } catch (Exception e) {
+                Toast.makeText(DetailContent.this, "" + e, Toast.LENGTH_SHORT).show();
+            }*/
             txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
             phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
             location = c.getString(c.getColumnIndex(sqlSelect[8]));

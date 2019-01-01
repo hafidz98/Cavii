@@ -25,6 +25,7 @@
 
             <!-- Gambar  -->
             <ImageView
+                android:id="@+id/img_konveksi"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:adjustViewBounds="true"
