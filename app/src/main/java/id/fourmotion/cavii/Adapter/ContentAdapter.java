@@ -60,6 +60,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.imgPath.setImageBitmap(bitmap);
         //holder.imgPath.getDrawable();
         holder.txtAlamat.setText(dataList.get(position).getAlamat());
+        holder.tombol_favorit.setSelected(dataList.get(position).getFav());
     }
 
     public int getItemCount() {
@@ -69,6 +70,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
     public class ContentViewHolder extends RecyclerView.ViewHolder {
         private TextView txtJudul, txtJenis, txtHarga, txtAlamat;
         private ImageView imgPath;
+        ImageButton tombol_favorit;
 
         public ContentViewHolder(View itemView) {
             super(itemView);
@@ -77,6 +79,7 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
             txtHarga = itemView.findViewById(R.id.txt_harga);
             imgPath = itemView.findViewById(R.id.img_konveksi);
             txtAlamat = itemView.findViewById(R.id.txt_alamat);
+            tombol_favorit = itemView.findViewById(R.id.tombol_fav);
 
         }
     }

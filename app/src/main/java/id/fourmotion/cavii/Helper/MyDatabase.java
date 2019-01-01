@@ -120,7 +120,8 @@ public class MyDatabase extends SQLiteAssetHelper {
                         c.getString(c.getColumnIndex(sqlSelect[4])),
                         c.getString(c.getColumnIndex(sqlSelect[5])),
                         "", "", "",
-                        c.getString(c.getColumnIndex(sqlSelect[8])))); //konten
+                        c.getString(c.getColumnIndex(sqlSelect[8]))),
+                        c.getString(c.getColumnIndex(sqlSelect[9]))); //konten
                 setId(c.getString(c.getColumnIndex(sqlSelect[0])));
             } while (c.moveToNext());
         } finally {

@@ -12,8 +12,9 @@ public class Content {
     private String phone;
     private String location;
     private String alamat;
+    private boolean favorit;
 
-    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath, String desc, String phone, String location, String alamat) {
+    public Content(String _id, String judul, String jenis, String bahan, String harga, String imgPath, String desc, String phone, String location, String alamat, String favorit) {
         this._id = _id;
         this.judul = judul;
         this.jenis = jenis;
@@ -24,6 +25,11 @@ public class Content {
         this.phone = phone;
         this.location = location;
         this.alamat = alamat;
+        if (favorit.equalsIgnoreCase("true")){
+            this.favorit = true;
+        } else {
+            this.favorit = false;
+        }
     }
 
 
@@ -80,6 +86,10 @@ public class Content {
 
     public void setJenis(String jenis) {
         this.jenis = jenis;
+    }
+
+    public boolean getFav() {
+        return favorit;
     }
 /*
     public void setBahan(String bahan) {

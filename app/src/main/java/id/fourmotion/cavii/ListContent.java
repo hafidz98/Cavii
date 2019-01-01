@@ -181,7 +181,7 @@ public class ListContent extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_content);
         try {
             //adapter.setContext(ListContent.this);
-            adapter = new ContentAdapter(db.getSearchKonveksi(selectedItemJenis, selectedItemBahan));
+            adapter = new ContentAdapter(db.getSearchKonveksi(inputSearch, selectedItemJenis, selectedItemBahan));
 
             //show data from database
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
