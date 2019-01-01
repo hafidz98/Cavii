@@ -63,7 +63,7 @@ public class Mainmenu extends AppCompatActivity {
     }
 
     private class ContentData extends SQLiteAssetHelper {
-        private TextView txtJudul, txtJenis, txtBahan, txtHarga;
+        private TextView txtJudul, txtJenis, txtTempat, txtHarga;
         private ImageView imgPath;
         private static final String DATABASE_NAME = "db_cavii_v1.db";
         private static final int DATABASE_VERSION = 1;
@@ -74,11 +74,12 @@ public class Mainmenu extends AppCompatActivity {
             txtJenis = findViewById(R.id.home_content_jenis);
             txtHarga = findViewById(R.id.home_content_harga);
             imgPath = findViewById(R.id.home_content_gambar);
+            txtTempat = findViewById(R.id.home_content_alamat);
         }
 
         private void setData(String id) {
             SQLiteDatabase db = getWritableDatabase();
-            String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_cost", "cav_pict"};
+            String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_cost", "cav_pict", "cav_address"};
 
             String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans " +
                     "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
@@ -98,7 +99,7 @@ public class Mainmenu extends AppCompatActivity {
             InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[4])));
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
             imgPath.setImageBitmap(bitmap);
-
+            txtTempat.setText(c.getString(c.getColumnIndex(sqlSelect[5])));
             c.close();
         }
 
