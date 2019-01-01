@@ -185,7 +185,7 @@ public class ListContent extends AppCompatActivity {
             try {
                 defaultData();
                 //adapter.setContext(ListContent.this);
-                adapter = new ContentAdapter(db.getSearchKonveksi(selectedItemJenis, selectedItemBahan));
+                adapter = new ContentAdapter(db.getSearchKonveksi(null,selectedItemJenis, selectedItemBahan));
             } catch (Exception e) {
                 //Data tidak ditemukan
                 Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
