@@ -161,5 +161,6 @@ public class DetailContent extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
+        finishActivity(0);
     }
 }

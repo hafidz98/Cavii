@@ -198,11 +198,15 @@ public class ListContent extends AppCompatActivity {
             @Override
             public void onClick(View view, int position) {
                 //Send Intent
-                if (db.getId(position) != null || db.getId(position).length() < 1) {
-                    Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
-                    toDetailContent.putExtra("trans_ID()", db.getId(position));
-                    startActivity(toDetailContent);
-                    overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
+                try {
+                    if (db.getId(position) != null) {
+                        Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
+                        toDetailContent.putExtra("trans_ID()", db.getId(position));
+                        startActivity(toDetailContent);
+                        overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
+                    }
+                }catch (Exception e){
+
                 }
             }
 
@@ -217,7 +221,7 @@ public class ListContent extends AppCompatActivity {
 
     void defaultData() {
         contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content("", "", "", "", "", "", "", "", "", "", ""));
+        contentArrayList.add(new Content(null, "", "", "", "", "", "", "", "", "", ""));
         adapter = new ContentAdapter(contentArrayList);
     }
 
