@@ -180,42 +180,32 @@ public class ListContent extends AppCompatActivity {
     void tampilData() {
         recyclerView = findViewById(R.id.rv_content);
         try {
-            defaultData();
             //adapter.setContext(ListContent.this);
             adapter = new ContentAdapter(db.getSearchKonveksi(selectedItemJenis, selectedItemBahan));
+
+            //show data from database
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+            //Click item in recycler view
+            recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
+                @Override
+                public void onClick(View view, int position) {
+                    //Send Intent
+                    Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
+                    toDetailContent.putExtra("trans_ID()", db.getId(position));
+                    startActivity(toDetailContent);
+                    overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
+                }
+
+                @Override
+                public void onLongClick(View view, int position) {
+                }
+            }));
         } catch (Exception e) {
             //Data tidak ditemukan
             Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
-            defaultData();
         }
-
-
-        //show data from database
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
-        //Click item in recycler view
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                //Send Intent
-                Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
-                toDetailContent.putExtra("trans_ID()", db.getId(position));
-                startActivity(toDetailContent);
-                overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
-            }
-
-            @Override
-            public void onLongClick(View view, int position) {
-            }
-        }));
-    }
-
-    void defaultData() {
-        contentArrayList = new ArrayList<>();
-        contentArrayList.add(new Content("", "", "", "", "", "", null, null, null, null));
-        adapter = new ContentAdapter(contentArrayList);
     }
 
     //interface for recycleView

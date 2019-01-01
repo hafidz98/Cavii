@@ -90,7 +90,6 @@ public class MyDatabase extends SQLiteAssetHelper {
         String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin", "cav_address"};
         String qSelect;
 
-
         qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin, cavii_konveksi.cav_address FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +

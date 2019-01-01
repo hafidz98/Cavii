@@ -50,7 +50,11 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.txtHarga.setText(dataList.get(position).getHarga());
         Locale localeID = new Locale("in", "ID");
         NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-        holder.txtHarga.setText(formatRupiah.format(Double.parseDouble(dataList.get(position).getHarga())));
+        try {
+            holder.txtHarga.setText(formatRupiah.format(Double.parseDouble(dataList.get(position).getHarga())));
+        } catch (Exception e){
+            //no string error
+        }
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + dataList.get(position).getImgPath());
         Bitmap bitmap = BitmapFactory.decodeStream(stream);
         holder.imgPath.setImageBitmap(bitmap);
