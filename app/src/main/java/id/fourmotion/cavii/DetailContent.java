@@ -122,7 +122,7 @@ public class DetailContent extends AppCompatActivity {
             //txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
             Locale localeID = new Locale("in", "ID");
             NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-            txtHarga.setText(formatRupiah.format((double)c.getDouble(c.getColumnIndex(sqlSelect[4]))));
+            txtHarga.setText(formatRupiah.format(c.getDouble(c.getColumnIndex(sqlSelect[4]))));
             InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
             imgPath.setImageBitmap(bitmap);

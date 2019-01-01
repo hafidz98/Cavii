@@ -179,22 +179,16 @@ public class ListContent extends AppCompatActivity {
 
     void tampilData() {
         recyclerView = findViewById(R.id.rv_content);
-
-
-        if (inputSearch == null || inputSearch.length() < 1) {
-            try {
-                defaultData();
-                //adapter.setContext(ListContent.this);
-                adapter = new ContentAdapter(db.getSearchKonveksi(selectedItemJenis, selectedItemBahan));
-            } catch (Exception e) {
-                //Data tidak ditemukan
-                Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
-                defaultData();
-            }
-        } else {
-            //pake search view
-            //adapter = new ContentAdapter(db.getSearchView(dataEkstra.get(0)));
+        try {
+            defaultData();
+            //adapter.setContext(ListContent.this);
+            adapter = new ContentAdapter(db.getSearchKonveksi(selectedItemJenis, selectedItemBahan));
+        } catch (Exception e) {
+            //Data tidak ditemukan
+            Toast.makeText(ListContent.this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
+            defaultData();
         }
+
 
         //show data from database
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);

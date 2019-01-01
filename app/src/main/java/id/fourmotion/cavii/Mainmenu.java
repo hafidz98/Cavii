@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -23,6 +24,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.io.InputStream;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Random;
 
 import id.fourmotion.cavii.Helper.MyDatabase;
 
@@ -41,6 +43,8 @@ public class Mainmenu extends AppCompatActivity {
 
         // -----------Final data to send via intent-------
         ContentData contentData = new ContentData(this);
+        int random = new Random().nextInt(contentData.getSize()-1) + 1;
+        contentData.setData(String.valueOf(random));
     }
 
     @Override
@@ -58,75 +62,54 @@ public class Mainmenu extends AppCompatActivity {
     }
 
     private class ContentData extends SQLiteAssetHelper {
-        private TextView txtJudul, txtJenis, txtBahan, txtHarga, txtDesc;
+        private TextView txtJudul, txtJenis, txtBahan, txtHarga;
         private ImageView imgPath;
         private static final String DATABASE_NAME = "db_cavii_v1.db";
         private static final int DATABASE_VERSION = 1;
-        String phoneNumber, location;
 
         private ContentData(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-            //txtJudul = findViewById(R.id.txt_judul_konveksi);
+            txtJudul = findViewById(R.id.home_content_judul);
             txtJenis = findViewById(R.id.home_content_jenis);
-            txtBahan = findViewById(R.id.txt_bahan);
-            txtDesc = findViewById(R.id.txt_desc);
-            txtHarga = findViewById(R.id.txt_harga);
-            imgPath = findViewById(R.id.img_konveksi);
+            txtHarga = findViewById(R.id.home_content_harga);
+            imgPath = findViewById(R.id.home_content_gambar);
         }
 
         private void setData(String id) {
             SQLiteDatabase db = getWritableDatabase();
-            String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_desc", "cav_phone_number", "cav_location_pin"};
+            String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_cost", "cav_pict"};
 
             String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin FROM cavii_trans " +
                     "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                     "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
                     "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
 
-            //try {
             String[] searchParams = new String[]{id};
 
             Cursor c = db.rawQuery(qSelect, searchParams);
             c.moveToFirst();
-//
-            setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
 
-            //txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
+            txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
             txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
-            txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
-            //txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
             Locale localeID = new Locale("in", "ID");
             NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
-            txtHarga.setText(formatRupiah.format((double) c.getDouble(c.getColumnIndex(sqlSelect[4]))));
-            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
+            txtHarga.setText(formatRupiah.format((double)c.getDouble(c.getColumnIndex(sqlSelect[3]))));
+            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[4])));
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
             imgPath.setImageBitmap(bitmap);
-            /*try {
-                InputStream ims = getAssets().open(c.getString(c.getColumnIndex(sqlSelect[5])));
 
-                Drawable d = Drawable.createFromStream(ims, null);
-                imgPath.setImageDrawable(d);
-            } catch (Exception e) {
-                Toast.makeText(DetailContent.this, "" + e, Toast.LENGTH_SHORT).show();
-            }*/
-            txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
-            phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
-            location = c.getString(c.getColumnIndex(sqlSelect[8]));
-
-            //Set button
-            //contentList = new ArrayList<>();
             c.close();
-            //} catch (Exception e) {
-            //    Log.d("Errorgan", "" + e);
-            //}
         }
 
-        String getPhoneData() {
-            return phoneNumber;
-        }
+        private int getSize(){
+            SQLiteDatabase db = getWritableDatabase();
+            String qSelect = "SELECT count(_id) FROM cavii_trans";
 
-        String getLocation() {
-            return location;
+            Cursor c = db.rawQuery(qSelect,null);
+            c.moveToFirst();
+            int size =  c.getInt(c.getColumnIndex("count(_id)"));
+            c.close();
+            return size;
         }
     }
 

@@ -18,7 +18,9 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import id.fourmotion.cavii.Helper.MyDatabase;
 import id.fourmotion.cavii.ListContent;
@@ -46,7 +48,9 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.txtJenis.setText(dataList.get(position).getJenis());
         holder.txtBahan.setText(dataList.get(position).getBahan());
         holder.txtHarga.setText(dataList.get(position).getHarga());
-
+        Locale localeID = new Locale("in", "ID");
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+        holder.txtHarga.setText(formatRupiah.format(Double.parseDouble(dataList.get(position).getHarga())));
         InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + dataList.get(position).getImgPath());
         Bitmap bitmap = BitmapFactory.decodeStream(stream);
         holder.imgPath.setImageBitmap(bitmap);
