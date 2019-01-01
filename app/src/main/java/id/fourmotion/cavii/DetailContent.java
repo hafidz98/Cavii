@@ -81,14 +81,14 @@ public class DetailContent extends AppCompatActivity {
         }
     }
 
-    public class ContentData extends SQLiteAssetHelper {
+    private class ContentData extends SQLiteAssetHelper {
         private TextView txtJudul, txtJenis, txtBahan, txtHarga, txtDesc;
         private ImageView imgPath;
         private static final String DATABASE_NAME = "db_cavii_v1.db";
         private static final int DATABASE_VERSION = 1;
         String phoneNumber, location;
 
-        public ContentData(Context context) {
+        private ContentData(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
             //txtJudul = findViewById(R.id.txt_judul_konveksi);
             txtJenis = findViewById(R.id.txt_jenis_detail);
@@ -98,7 +98,7 @@ public class DetailContent extends AppCompatActivity {
             imgPath = findViewById(R.id.img_konveksi);
         }
 
-        public void setData(String id) {
+        private void setData(String id) {
             SQLiteDatabase db = getWritableDatabase();
             String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_desc", "cav_phone_number", "cav_location_pin"};
 
