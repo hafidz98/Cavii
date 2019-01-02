@@ -104,7 +104,7 @@
             android:layout_weight="1"
             android:background="@drawable/selector_click"
             android:onClick="menuFav"
-            android:src="@mipmap/ic_cavii_fav" />
+            android:src="@mipmap/ic_cavii_fav_love" />
 
         <!--Menu About-->
         <ImageButton
