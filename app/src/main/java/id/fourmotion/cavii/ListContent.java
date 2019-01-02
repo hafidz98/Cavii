@@ -275,4 +275,5 @@ public class ListContent extends AppCompatActivity {
     public static Context getContext() {
         return context;
     }
+
 }
