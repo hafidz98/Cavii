@@ -64,16 +64,19 @@ public class MenuFav extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
+        finish();
     }
 
     public void menuHome(View view) {
         startActivity(new Intent(MenuFav.this, Mainmenu.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+        finish();
     }
 
     public void menuCari(View view) {
         startActivity(new Intent(MenuFav.this, ListContent.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+        finish();
     }
 
     public void menuFav(View view) {
@@ -82,5 +85,6 @@ public class MenuFav extends AppCompatActivity {
     public void menuAbout(View view) {
         startActivity(new Intent(MenuFav.this, MenuAbout.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+        finish();
     }
 }
