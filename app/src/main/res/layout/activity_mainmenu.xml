@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,16 +12,29 @@
     <!-- Bungkus banner -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="200sp"
         android:layout_gravity="top"
         android:orientation="vertical">
 
         <!-- Gambar disini -->
+        <!--
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scaleType="fitXY"
-            android:src="@drawable/banner" />
+            android:src="@drawable/banner" /> -->
+
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/carouselViewer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:autoPlay="true"
+            app:fillColor="#FFFFFFFF"
+            app:pageColor="#00000000"
+            app:radius="6dp"
+            app:slideInterval="3000"
+            app:strokeColor="#FF777777"
+            app:strokeWidth="1dp" />
 
     </LinearLayout><!-- Akhir Bungkus banner -->
 
@@ -29,8 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="7dp"
-        android:scrollbars="none"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:scrollbars="none">
 
         <!-- Bungkus dalam konten -->
         <LinearLayout
@@ -110,8 +124,8 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="7dp"
                     android:paddingEnd="7dp"
-                    android:textSize="16sp"
-                    android:text="Ini sub teks" />
+                    android:text="Ini sub teks"
+                    android:textSize="16sp" />
 
             </LinearLayout><!-- Akhir Tulisan jenis dan harga-->
 

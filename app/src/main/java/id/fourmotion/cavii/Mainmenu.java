@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.io.InputStream;
 import java.text.NumberFormat;
@@ -33,6 +35,8 @@ import id.fourmotion.cavii.Helper.MyDatabase;
 public class Mainmenu extends AppCompatActivity {
 
     private String id;
+    CarouselView carouselView;
+    int[] gambarSlider = {R.drawable.banner, R.drawable.banner};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,20 @@ public class Mainmenu extends AppCompatActivity {
         // -----------Final data to send via intent-------
         ContentData contentData = new ContentData(this);
         contentData.setData(String.valueOf(new Random().nextInt(contentData.getSize()-1) + 1));
+
+        carouselView = (CarouselView) findViewById(R.id.carouselViewer);
+        carouselView.setPageCount(gambarSlider.length);
+
+        carouselView.setImageListener(imageListener);
     }
+
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(gambarSlider[position]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        }
+    };
 
     @Override
     public void onBackPressed() {
