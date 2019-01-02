@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ln_capsule"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:id="@+id/ln_capsule">
+    android:orientation="vertical">
 
     <!-- Teks judul konten -->
     <TextView
@@ -35,7 +35,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:tag="select_area"
                 android:src="@drawable/kpj2" />
 
         </LinearLayout>
@@ -89,19 +88,17 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_favorit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:tag="layout_favorit"
-                android:id="@+id/layout_favorit"
                 android:gravity="center">
 
                 <ImageButton
-                    android:tag="tombol_favorit"
                     android:id="@+id/tombol_fav"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/selector_favorit"/>
+                    android:background="@drawable/selector_favorit" />
 
             </LinearLayout>
 

@@ -192,7 +192,7 @@ public class ListContent extends AppCompatActivity {
         try {
             //adapter.setContext(ListContent.this);
             db = new MyDatabase(ListContent.this);
-            adapter = new ContentAdapter(db.getSearchKonveksi(inputSearch, selectedItemJenis, selectedItemBahan));
+            adapter = new ContentAdapter(this, db.getSearchKonveksi(inputSearch, selectedItemJenis, selectedItemBahan));
 
         } catch (Exception e) {
             //Data tidak ditemukan
@@ -204,15 +204,16 @@ public class ListContent extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 
-/*
+        /*
         Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
         toDetailContent.putExtra("trans_ID()", ContentAdapter.receiveID());
         startActivity(toDetailContent);
         overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
         */
         //Click item in recycler view
-
+        /*
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
@@ -236,13 +237,13 @@ public class ListContent extends AppCompatActivity {
             public void onLongClick(View view, int position) {
 
             }
-        }));
+        }));*/
     }
 
     void defaultData() {
         contentArrayList = new ArrayList<>();
         contentArrayList.add(new Content(null, "", "", "", "", "", "", "", "", "", ""));
-        adapter = new ContentAdapter(contentArrayList);
+        adapter = new ContentAdapter(this, contentArrayList);
     }
 
     //interface for recycleView

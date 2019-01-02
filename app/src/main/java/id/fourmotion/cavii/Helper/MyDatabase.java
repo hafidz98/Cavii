@@ -14,6 +14,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.util.ArrayList;
 
+import id.fourmotion.cavii.ListContent;
 import id.fourmotion.cavii.Model.Content;
 
 import static java.lang.String.valueOf;
@@ -78,7 +79,7 @@ public class MyDatabase extends SQLiteAssetHelper {
         id.add(Id);
     }
 
-    public void refreshId(){
+    public void refreshId() {
         id = new ArrayList<>();
     }
 
@@ -101,7 +102,7 @@ public class MyDatabase extends SQLiteAssetHelper {
                 "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_konveksi.cav_name LIKE ? COLLATE NOCASE OR (cavii_jenis.cav_jen_name LIKE ? AND cavii_bahan.cav_ba_name LIKE ?) ORDER BY cavii_trans.cav_cost ASC";
 
 
-        String[] searchParams = new String[]{"%" +valueOf(cari) + "%", valueOf(jenis) + "%", valueOf(bahan) + "%"};
+        String[] searchParams = new String[]{"%" + valueOf(cari) + "%", valueOf(jenis) + "%", valueOf(bahan) + "%"};
 
         //selectionArgs = new String [] {String.valueOf(g),String.valueOf(s)};
 
@@ -116,10 +117,12 @@ public class MyDatabase extends SQLiteAssetHelper {
                         c.getString(c.getColumnIndex(sqlSelect[0])),
                         c.getString(c.getColumnIndex(sqlSelect[1])),
                         c.getString(c.getColumnIndex(sqlSelect[2])),
-                        null,
+                        "",
                         c.getString(c.getColumnIndex(sqlSelect[4])),
                         c.getString(c.getColumnIndex(sqlSelect[5])),
-                        "", "", "",
+                        "",
+                        "",
+                        "",
                         c.getString(c.getColumnIndex(sqlSelect[8])),
                         c.getString(c.getColumnIndex(sqlSelect[9])))); //konten
 
@@ -132,16 +135,16 @@ public class MyDatabase extends SQLiteAssetHelper {
     }
 
     //-----------
-    public void setFav(String getID, String cons){
-        if ((getID == null && getID.length() <1) || (cons == null && cons.length() <1)){
+    public void setFav(String getID, String cons) {
+        if ((getID == null && getID.length() < 1) || (cons == null && cons.length() < 1)) {
             Log.d("Pesan ID", "ID ini : " + getID);
             Log.d("Pesan Cons", "Cons ini : " + cons);
-        }else {
+        } else {
             SQLiteDatabase db = this.getWritableDatabase();
 
             ContentValues values = new ContentValues();
             values.put("cav_fav", cons);
-            db.update("cavii_trans", values, "_id= ?", new String[] {String.valueOf(getID)});
+            db.update("cavii_trans", values, "_id= ?", new String[]{String.valueOf(getID)});
         }
     }
 }
