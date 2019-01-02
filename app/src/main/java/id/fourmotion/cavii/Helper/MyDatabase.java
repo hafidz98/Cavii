@@ -163,4 +163,47 @@ public class MyDatabase extends SQLiteAssetHelper {
         return db.update("cavii_trans", values, "_id= ?", new String[] {String.valueOf(getID)});
 
     }
+
+    public ArrayList<Content> getSelectFavorite(){
+        ArrayList<Content> contentArrayList;
+        SQLiteDatabase db = getWritableDatabase();
+
+        String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_ba_name", "cav_cost", "cav_pict", "cav_phone_number", "cav_location_pin", "cav_address", "cav_fav"};
+        String qSelect;
+
+        qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin, cavii_konveksi.cav_address, cavii_trans.cav_fav FROM cavii_trans " +
+                "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
+                "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
+                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans.cav_fav = ? ORDER BY cavii_trans.cav_cost ASC";
+
+        String kondisi = "true";
+        String[] searchParams = new String[]{valueOf(kondisi)};
+
+        //selectionArgs = new String [] {String.valueOf(g),String.valueOf(s)};
+
+        Cursor c = db.rawQuery(qSelect, searchParams);
+        c.moveToFirst();
+        //ArrayList<String> dbBahan = new ArrayList<>();
+        contentArrayList = new ArrayList<>();
+
+        try {
+            do {
+                contentArrayList.add(new Content(
+                        c.getString(c.getColumnIndex(sqlSelect[0])),
+                        c.getString(c.getColumnIndex(sqlSelect[1])),
+                        c.getString(c.getColumnIndex(sqlSelect[2])),
+                        null,
+                        c.getString(c.getColumnIndex(sqlSelect[4])),
+                        c.getString(c.getColumnIndex(sqlSelect[5])),
+                        "", "", "",
+                        c.getString(c.getColumnIndex(sqlSelect[8])),
+                        c.getString(c.getColumnIndex(sqlSelect[9])))); //konten
+
+                setId(c.getString(c.getColumnIndex(sqlSelect[0])));
+            } while (c.moveToNext());
+        } finally {
+            c.close();
+        }
+        return contentArrayList;
+    }
 }
