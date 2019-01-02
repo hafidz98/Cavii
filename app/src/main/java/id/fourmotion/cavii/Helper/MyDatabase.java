@@ -77,6 +77,10 @@ public class MyDatabase extends SQLiteAssetHelper {
         id.add(Id);
     }
 
+    public void refreshId(){
+        id = new ArrayList<>();
+    }
+
     public String getId(int position) {
         return id.get(position);
     }
@@ -93,24 +97,20 @@ public class MyDatabase extends SQLiteAssetHelper {
         qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name , cavii_jenis.cav_jen_name , cavii_bahan.cav_ba_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_desc, cavii_konveksi.cav_phone_number, cavii_konveksi.cav_location_pin, cavii_konveksi.cav_address, cavii_trans.cav_fav FROM cavii_trans " +
                 "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
                 "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
-                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_konveksi.cav_name LIKE ? OR (cavii_jenis.cav_jen_name LIKE ? AND cavii_bahan.cav_ba_name LIKE ?) ORDER BY cavii_trans.cav_cost ASC";
+                "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_konveksi.cav_name LIKE ? COLLATE NOCASE OR (cavii_jenis.cav_jen_name LIKE ? AND cavii_bahan.cav_ba_name LIKE ?) ORDER BY cavii_trans.cav_cost ASC";
 
 
-        String[] searchParams = new String[]{valueOf(cari) + "%", valueOf(jenis) + "%", valueOf(bahan) + "%"};
+        String[] searchParams = new String[]{"%" +valueOf(cari) + "%", valueOf(jenis) + "%", valueOf(bahan) + "%"};
 
         //selectionArgs = new String [] {String.valueOf(g),String.valueOf(s)};
 
         Cursor c = db.rawQuery(qSelect, searchParams);
         c.moveToFirst();
-
-
         //ArrayList<String> dbBahan = new ArrayList<>();
         contentArrayList = new ArrayList<>();
 
         try {
             do {
-
-
                 contentArrayList.add(new Content(
                         c.getString(c.getColumnIndex(sqlSelect[0])),
                         c.getString(c.getColumnIndex(sqlSelect[1])),

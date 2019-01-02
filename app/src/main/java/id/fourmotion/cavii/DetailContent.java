@@ -58,7 +58,7 @@ public class DetailContent extends AppCompatActivity {
             tombolWA.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri WA = Uri.parse("smsto:" + data.getPhoneData());
+                    Uri WA = Uri.parse("smsto: 0" + data.getPhoneData());
                     Intent whatsapp = new Intent(Intent.ACTION_SENDTO, WA);
                     whatsapp.setPackage("com.whatsapp");
                     startActivity(whatsapp);
@@ -116,36 +116,19 @@ public class DetailContent extends AppCompatActivity {
             setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
 
 
-            //txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
             txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
             txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
-            //txtHarga.setText(c.getString(c.getColumnIndex(sqlSelect[4])));
             Locale localeID = new Locale("in", "ID");
             NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
             txtHarga.setText(formatRupiah.format(c.getDouble(c.getColumnIndex(sqlSelect[4]))));
             InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[5])));
             Bitmap bitmap = BitmapFactory.decodeStream(stream);
             imgPath.setImageBitmap(bitmap);
-            /*try {
-                InputStream ims = getAssets().open(c.getString(c.getColumnIndex(sqlSelect[5])));
-
-                Drawable d = Drawable.createFromStream(ims, null);
-                imgPath.setImageDrawable(d);
-            } catch (Exception e) {
-                Toast.makeText(DetailContent.this, "" + e, Toast.LENGTH_SHORT).show();
-            }*/
             txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
             phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
             location = c.getString(c.getColumnIndex(sqlSelect[8]));
 
-            //Set button
-
-
-            //contentList = new ArrayList<>();
             c.close();
-            //} catch (Exception e) {
-            //    Log.d("Errorgan", "" + e);
-            //}
         }
 
         String getPhoneData() {
@@ -161,6 +144,6 @@ public class DetailContent extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
-        finishActivity(0);
+        finish();
     }
 }
