@@ -252,13 +252,14 @@ public class ListContent extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        finish();
         overridePendingTransition(R.anim.anim_in_left, R.anim.anim_out_left);
+        finish();
     }
 
     public void menuHome(View view) {
         startActivity(new Intent(ListContent.this, Mainmenu.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+        finish();
     }
 
     public void menuCari(View view) {
@@ -267,11 +268,13 @@ public class ListContent extends AppCompatActivity {
     public void menuFav(View view) {
         startActivity(new Intent(ListContent.this, MenuFav.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+        finish();
     }
 
     public void menuAbout(View view) {
         startActivity(new Intent(ListContent.this, MenuAbout.class));
         overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+        finish();
     }
 
     static Context context;
