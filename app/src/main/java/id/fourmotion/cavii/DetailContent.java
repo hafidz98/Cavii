@@ -71,7 +71,7 @@ public class DetailContent extends AppCompatActivity {
             tombolKontak.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri dial = Uri.parse("tel:" + data.getPhoneData());
+                    Uri dial = Uri.parse("tel: 0" + data.getPhoneData());
                     Intent panggil = new Intent(Intent.ACTION_DIAL, dial);
                     startActivity(panggil);
                 }
