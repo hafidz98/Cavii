@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:drawable="@drawable/not_full_star_fav"
+<item android:drawable="@drawable/fav_love_off"
     android:state_selected="false"/>
-    <item android:drawable="@drawable/full_star_fav"
+    <item android:drawable="@drawable/fav_love_on"
         android:state_selected="true"/>
 </selector>
