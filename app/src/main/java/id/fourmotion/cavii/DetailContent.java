@@ -136,7 +136,7 @@ public class DetailContent extends AppCompatActivity {
             DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[1])));
             DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[2])));
             DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[3])));
-            DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[4])));
+            DetailContent.dataPesan.add(formatRupiah.format(c.getString(c.getColumnIndex(sqlSelect[4]))));
 
             c.close();
         }
