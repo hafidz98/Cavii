@@ -1,5 +1,7 @@
 package id.fourmotion.cavii.Model;
 
+import android.content.Context;
+
 public class Content {
 
     private String _id;
