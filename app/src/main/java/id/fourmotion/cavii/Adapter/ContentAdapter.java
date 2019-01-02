@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -108,5 +109,8 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
             tombol_favorit = itemView.findViewById(R.id.tombol_fav);
 
         }
+
+
     }
+
 }
