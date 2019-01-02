@@ -132,35 +132,16 @@ public class MyDatabase extends SQLiteAssetHelper {
     }
 
     //-----------
-    public int setFav(String getID, String cons){
+    public void setFav(String getID, String cons){
         if ((getID == null && getID.length() <1) || (cons == null && cons.length() <1)){
             Log.d("Pesan ID", "ID ini : " + getID);
             Log.d("Pesan Cons", "Cons ini : " + cons);
+        }else {
+            SQLiteDatabase db = this.getWritableDatabase();
+
+            ContentValues values = new ContentValues();
+            values.put("cav_fav", cons);
+            db.update("cavii_trans", values, "_id= ?", new String[] {String.valueOf(getID)});
         }
-
-        /*
-        ContentValues cv = new ContentValues();
-        cv.put("cav_fav",cons);
-        */
-        /*
-        try {
-            SQLiteDatabase db = getWritableDatabase();
-
-            String qSelect = "UPDATE cavii_trans SET cav_fav = " + cons + " WHERE cavii_trans._id = " + getID;
-
-            Cursor c = db.rawQuery(qSelect, null);
-            c.moveToFirst();
-
-            c.close();
-        } catch (Exception e){
-            Log.d("Pesannya ini","Error nya ini : " + e);
-        }*/
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("cav_fav", cons);
-
-        return db.update("cavii_trans", values, "_id= ?", new String[] {String.valueOf(getID)});
-
     }
 }

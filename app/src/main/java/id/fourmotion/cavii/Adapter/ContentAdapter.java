@@ -65,26 +65,31 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.imgPath.setImageBitmap(bitmap);
         holder.txtAlamat.setText(dataList.get(position).getAlamat());
         holder.tombol_favorit.setSelected(dataList.get(position).getFav());
-
+/*
+        final MyDatabase db = new MyDatabase(ListContent.getContext());
         holder.tombol_favorit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyDatabase db = new MyDatabase(ListContent.getContext());
-                if (holder.tombol_favorit.isSelected()){
+                if (holder.tombol_favorit.isSelected()) {
                     holder.tombol_favorit.setSelected(false);
                     try {
-                        Log.d("ID ini","ID nya : " + dataList.get(position).get_id());
-
                         db.setFav(dataList.get(position).get_id(), "false");
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         Log.d("Error Disini", "Ini errornya : " + e);
                     }
-                }else {
+                } else {
                     holder.tombol_favorit.setSelected(true);
                     db.setFav(dataList.get(position).get_id(), "true");
                 }
             }
         });
+
+        holder.imgPath.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                idData = dataList.get(position).get_id();
+            }
+        });*/
     }
 
     public int getItemCount() {
@@ -109,4 +114,6 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
         }
     }
+
+
 }

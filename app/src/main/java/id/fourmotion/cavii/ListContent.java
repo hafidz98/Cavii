@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
@@ -203,9 +204,16 @@ public class ListContent extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListContent.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+/*
+        Intent toDetailContent = new Intent(ListContent.this, DetailContent.class);
+        toDetailContent.putExtra("trans_ID()", ContentAdapter.receiveID());
+        startActivity(toDetailContent);
+        overridePendingTransition(R.anim.anim_in_right, R.anim.anim_out_right);
+        */
         //Click item in recycler view
 
-        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new ClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(this, recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, final int position) {
                 try {
@@ -229,7 +237,6 @@ public class ListContent extends AppCompatActivity {
 
             }
         }));
-
     }
 
     void defaultData() {
@@ -239,11 +246,7 @@ public class ListContent extends AppCompatActivity {
     }
 
     //interface for recycleView
-    public interface ClickListener {
-        void onClick(View view, int position);
 
-        void onLongClick(View view, int position);
-    }
 
     @Override
     public void onBackPressed() {

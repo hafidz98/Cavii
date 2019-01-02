@@ -71,7 +71,7 @@ public class DetailContent extends AppCompatActivity {
             tombolKontak.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri dial = Uri.parse("tel:" + data.getPhoneData());
+                    Uri dial = Uri.parse("tel: 0" + data.getPhoneData());
                     Intent panggil = new Intent(Intent.ACTION_DIAL, dial);
                     startActivity(panggil);
                 }
@@ -82,7 +82,7 @@ public class DetailContent extends AppCompatActivity {
     }
 
     private class ContentData extends SQLiteAssetHelper {
-        private TextView txtJudul, txtJenis, txtBahan, txtHarga, txtDesc;
+        private TextView txtJenis, txtBahan, txtHarga, txtDesc;
         private ImageView imgPath;
         private static final String DATABASE_NAME = "db_cavii_v1.db";
         private static final int DATABASE_VERSION = 1;

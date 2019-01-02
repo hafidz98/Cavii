@@ -10,10 +10,16 @@ import android.view.View;
 
 class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
 
-    private ListContent.ClickListener clicklistener;
+    private ClickListener clicklistener;
     private GestureDetector gestureDetector;
 
-    public RecyclerTouchListener(Context context, final RecyclerView recycleView, final ListContent.ClickListener clicklistener){
+    public interface ClickListener {
+        void onClick(View view, int position);
+
+        void onLongClick(View view, int position);
+    }
+
+    public RecyclerTouchListener(Context context, final RecyclerView recycleView, final ClickListener clicklistener){
 
         this.clicklistener=clicklistener;
         gestureDetector=new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
