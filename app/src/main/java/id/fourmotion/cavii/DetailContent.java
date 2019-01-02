@@ -19,14 +19,12 @@ import android.widget.Toast;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
 import java.io.InputStream;
+import java.net.URI;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Locale;
 
 public class DetailContent extends AppCompatActivity {
-
-    String dataEkstra;
-    //private Content dataList = new Content("","","aaa","","","","","","");
-    //MyDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +56,14 @@ public class DetailContent extends AppCompatActivity {
             tombolWA.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri WA = Uri.parse("smsto: 0" + data.getPhoneData());
-                    Intent whatsapp = new Intent(Intent.ACTION_SENDTO, WA);
-                    whatsapp.setPackage("com.whatsapp");
-                    startActivity(whatsapp);
+                    Intent sendIntent = new Intent(Intent.ACTION_SEND);
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "Hai *" + dataPesan.get(0) + "*, \nsaya ingin memesan *" + dataPesan.get(1) +
+                            "* \ndengan bahan *" + dataPesan.get(2) + "* \nseharga *" + dataPesan.get(3) + "*");
+                    sendIntent.setType("text/plain");
+                    //sendIntent.putExtra("jid", data.getPhoneData() + "@s.whatsapp.net");
+                    sendIntent.putExtra("jid", "62" + data.getPhoneData() + "@s.whatsapp.net");
+                    sendIntent.setPackage("com.whatsapp");
+                    startActivity(sendIntent);
                 }
             });
         } catch (Exception e) {
@@ -71,7 +73,7 @@ public class DetailContent extends AppCompatActivity {
             tombolKontak.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Uri dial = Uri.parse("tel: 0" + data.getPhoneData());
+                    Uri dial = Uri.parse("tel: 62" + data.getPhoneData());
                     Intent panggil = new Intent(Intent.ACTION_DIAL, dial);
                     startActivity(panggil);
                 }
@@ -81,7 +83,11 @@ public class DetailContent extends AppCompatActivity {
         }
     }
 
+    static ArrayList<String> dataPesan;
+
     private class ContentData extends SQLiteAssetHelper {
+
+
         private TextView txtJenis, txtBahan, txtHarga, txtDesc;
         private ImageView imgPath;
         private static final String DATABASE_NAME = "db_cavii_v1.db";
@@ -114,8 +120,6 @@ public class DetailContent extends AppCompatActivity {
             c.moveToFirst();
 
             setTitle(c.getString(c.getColumnIndex(sqlSelect[1])));
-
-
             txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
             txtBahan.setText(c.getString(c.getColumnIndex(sqlSelect[3])));
             Locale localeID = new Locale("in", "ID");
@@ -127,6 +131,12 @@ public class DetailContent extends AppCompatActivity {
             txtDesc.setText(c.getString(c.getColumnIndex(sqlSelect[6])));
             phoneNumber = c.getString(c.getColumnIndex(sqlSelect[7]));
             location = c.getString(c.getColumnIndex(sqlSelect[8]));
+
+            DetailContent.dataPesan = new ArrayList<>();
+            DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[1])));
+            DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[2])));
+            DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[3])));
+            DetailContent.dataPesan.add(c.getString(c.getColumnIndex(sqlSelect[4])));
 
             c.close();
         }
