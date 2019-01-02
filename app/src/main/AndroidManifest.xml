@@ -2,11 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="id.fourmotion.cavii">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_cavii"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_cavii"
         android:supportsRtl="true"
         android:theme="@style/ThemeUtama">
 
@@ -15,33 +19,42 @@
             android:name=".Splashscreen"
             android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
-
-        </activity>
-
-        <!-- Bagian menu utama -->
-        <activity
-            android:name=".Mainmenu"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama"/>
-
-        <!-- Bagian detail dari hasil pencarian -->
-        <activity android:name=".DetailContent"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama"/>
-
-        <!-- Bagian activity menampilkan pencarian -->
-        <activity android:name=".ListContent"
-            android:screenOrientation="portrait"
-            android:theme="@style/ThemeUtama">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <!-- Bagian menu utama -->
+        <activity
+            android:name=".Mainmenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"
+            android:launchMode="singleTask"/>
 
+        <!-- Bagian detail dari hasil pencarian -->
+        <activity
+            android:name=".DetailContent"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"
+            android:launchMode="singleTask"/>
+
+        <!-- Bagian activity menampilkan pencarian -->
+        <activity
+            android:name=".ListContent"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"
+            android:launchMode="singleTask"></activity>
+        <activity
+            android:name=".MenuFav"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"
+            android:launchMode="singleTask"/>
+        <activity
+            android:name=".MenuAbout"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeUtama"
+            android:launchMode="singleTask"></activity>
     </application>
 
 </manifest>

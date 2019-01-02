@@ -1,117 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:onClick="@+id/clickContent"
+    android:id="@+id/ln_capsule"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="7dp"
+    android:layout_marginTop="7dp"
+    android:layout_marginRight="7dp"
+    android:background="@drawable/layout_custom_border"
+    android:orientation="vertical">
 
-    <!-- Teks judul konten -->
-    <TextView
-        android:id="@+id/txt_judul_konveksi"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:padding="5dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp"
-        android:text="TextView" />
-
-    <!-- Kapsul konten -->
+        android:background="@drawable/layout_custom_border_blue"
+        android:orientation="vertical"
+        android:padding="7dp">
+        <!-- Teks judul konten -->
+        <TextView
+            android:id="@+id/txt_judul_konveksi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="20sp"
+            android:textStyle="bold" /><!-- Tutup teks judul -->
+    </LinearLayout>
+    <!-- Bungkus konten isi -->
     <LinearLayout
-        android:background="@color/backgroundColorWhite"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:orientation="vertical">
 
-        <!-- Kolom kiri -->
         <!-- Gambar deskripsi -->
         <LinearLayout
-            android:layout_weight="1"
-            android:padding="5dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp">
 
             <!-- Menampilkan gambar -->
             <ImageView
                 android:id="@+id/img_konveksi"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/kpj2"
+                android:tag="select_area" />
 
         </LinearLayout>
 
-        <!-- Kolom kanan -->
         <!-- Kapsul Keterangan -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <!-- Bungkus teks atas -->
+            <!-- Bungkus teks bawah -->
             <LinearLayout
-                android:paddingTop="5dp"
-                android:paddingRight="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
                 android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <!-- Teks deskripsi jenis -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Jenis" />
+                android:paddingTop="7dp"
+                android:paddingBottom="7dp">
 
                 <!-- Teks jenis -->
                 <TextView
-                    android:gravity="center"
                     android:id="@+id/txt_jenis"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:background="@drawable/textbox_custom_border" />
-
-                <!-- Teks deskripsi bahan -->
-                <TextView
-                    android:paddingTop="5dp"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bahan" />
-
-                <!-- Teks bahan -->
-                <TextView
-                    android:gravity="center"
-                    android:id="@+id/txt_bahan"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:background="@drawable/textbox_custom_border" />
-            </LinearLayout>
-
-
-            <!-- Kapsul teks deskripsi harga -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="bottom"
-                android:orientation="vertical">
-
-                <!-- Teks judul -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Harga" />
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:text="Kemeja Lengan Panjang"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <!-- Teks harga -->
                 <TextView
                     android:id="@+id/txt_harga"
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:gravity="center"
-                    android:background="@color/colorPrimary" />
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:text="Rp123.456.789"
+                    android:textColor="@color/colorRed"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/txt_alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="7dp"
+                    android:paddingEnd="7dp"
+                    android:text="Disini - Disana, Dimanamana"
+                    android:textSize="16sp" />
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_favorit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/layout_custom_border"
+                android:gravity="center"
+                android:tag="layout_favorit">
+
+                <ImageButton
+                    android:id="@+id/tombol_fav"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/backgroundColorWhite"
+                    android:padding="15sp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/selector_favorit"
+                    android:tag="tombol_favorit" />
+
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout><!-- Tutup bungkus kontent -->
+
 </LinearLayout>

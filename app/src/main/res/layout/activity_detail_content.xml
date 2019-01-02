@@ -3,6 +3,177 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:baselineAligned="false"
+    android:orientation="vertical"
     tools:context=".DetailContent">
+
+    <!-- Awal scroll view -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/backgroundColorWhite"
+        android:scrollbars="none">
+
+        <!-- View untuk display isi kontennya -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/backgroundColorWhite"
+            android:orientation="vertical">
+
+            <!-- Gambar  -->
+            <ImageView
+                android:id="@+id/img_konveksi"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:src="@mipmap/ic_cavii" />
+
+            <!-- Teks deskripsi -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Deskripsi" />
+
+            <!-- Teks deskripsi "deskripsi" -->
+            <TextView
+                android:id="@+id/txt_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minLines="6"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:text="@string/stringPanjang" />
+
+            <!-- Bungkus kontent Jenis, Bahan, dan harga -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp">
+
+                <!-- Bungkus bahan -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <!-- Teks jenis -->
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Jenis" />
+
+                    <!-- Teks deskripsi jenis -->
+                    <TextView
+                        android:id="@+id/txt_jenis_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/textbox_custom_border"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <!-- Bungkus bahan -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <!-- Teks bahan -->
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Bahan" />
+
+                    <!-- Teks deskripsi bahan -->
+                    <TextView
+                        android:id="@+id/txt_bahan"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/textbox_custom_border"
+                        android:gravity="center" />
+
+                </LinearLayout>
+
+                <!-- Bungkus harga -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <!-- Teks harga -->
+                    <TextView
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Harga" />
+
+                    <!-- Teks deskripsi harga -->
+                    <TextView
+                        android:id="@+id/txt_harga"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="center"
+                        android:background="@color/colorPrimary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout><!-- Tutup view untuk display konten -->
+
+    </ScrollView><!-- Tutup scroll view -->
+
+    <!-- View untuk tombol yang dibawah -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <!-- Tombol kontak/telepon -->
+        <ImageButton
+            android:id="@+id/tombol_kontak"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_custem_shape"
+            android:src="@mipmap/ic_cavii_telp" />
+
+        <!-- Tombol whatsapp/wa -->
+        <ImageButton
+            android:id="@+id/tombol_wa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_custem_shape"
+            android:src="@mipmap/ic_cavii_wa" />
+
+        <!-- Tombol maps -->
+        <ImageButton
+            android:id="@+id/tombol_maps"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_custem_shape"
+            android:src="@mipmap/ic_cavii_pin_maps" />
+
+    </LinearLayout><!-- Tutup view tombol -->
 
 </LinearLayout>

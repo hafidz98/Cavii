@@ -1,197 +1,153 @@
 package id.fourmotion.cavii;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.graphics.Color;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Handler;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListAdapter;
-import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
-import id.fourmotion.cavii.Helper.DataBaseHelper;
+import java.io.InputStream;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Random;
+
 import id.fourmotion.cavii.Helper.MyDatabase;
 
 public class Mainmenu extends AppCompatActivity {
 
-    private ArrayList<String> jens, bans;
-    private MyDatabase db;
+    private String id;
+    CarouselView carouselView;
+    int[] gambarSlider = {R.drawable.banner, R.drawable.banner};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmenu);
 
+        //Button
+        ImageButton homeButton = findViewById(R.id.menu_home);
+        homeButton.setSelected(true);
+
         // -----------Final data to send via intent-------
-        final String input[] = new String[1];
-        final String selectedItemJenis[] = new String[1];
-        final String selectedItemBahan[] = new String[1];
+        ContentData contentData = new ContentData(this);
+        contentData.setData(String.valueOf(new Random().nextInt(contentData.getSize()-1) + 1));
 
-        // ---------Filter Jenis Override-------------
-        db = new MyDatabase(this);
-        jens = db.getJenis();
+        carouselView = (CarouselView) findViewById(R.id.carouselViewer);
+        carouselView.setPageCount(gambarSlider.length);
 
-        final int selectJenis[] = new int[1];
-        selectJenis[0] = 0;
-
-        final Spinner filterJenis = findViewById(R.id.jenis_filter);
-
-        final ArrayAdapter<String> jenisArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.support_simple_spinner_dropdown_item, jens){
-
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == selectJenis[0]) {
-                    // Set the item background color and text
-                    tv.setBackgroundColor(Color.parseColor("#00A2E9"));
-                    tv.setTextColor(Color.parseColor("#ffffff"));
-                } else {
-                    // Set the alternate item background color and text
-                    tv.setBackgroundColor(Color.parseColor("#ffffff"));
-                    tv.setTextColor(Color.parseColor("#000000"));
-                }
-                return view;
-            }
-
-        };
-
-
-        jenisArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        filterJenis.setAdapter(jenisArrayAdapter);
-
-        filterJenis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Take data from selected item
-                selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
-                selectJenis[0] = parent.getSelectedItemPosition();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-        // ---------Filter Jenis Override-------------
-        bans = db.getBahan();
-        final Spinner filterBahan = findViewById(R.id.bahan_filter);
-        final int selectBahan[] = new int[1];
-        selectBahan[0] = 0;
-
-
-
-        final ArrayAdapter<String> bahanArrayAdapter = new ArrayAdapter<String>(
-                this, R.layout.support_simple_spinner_dropdown_item, bans) {
-            @Override
-            public View getDropDownView(int position, View convertView,
-                                        ViewGroup parent) {
-                View view = super.getDropDownView(position, convertView, parent);
-                TextView tv = (TextView) view;
-                if (position == selectBahan[0]) {
-                    // Set the item background color and text
-                    tv.setBackgroundColor(Color.parseColor("#00A2E9"));
-                    tv.setTextColor(Color.parseColor("#ffffff"));
-                } else {
-                    // Set the alternate item background color and text
-                    tv.setBackgroundColor(Color.parseColor("#ffffff"));
-                    tv.setTextColor(Color.parseColor("#000000"));
-                }
-                return view;
-            }
-        };
-        bahanArrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-        filterBahan.setAdapter(bahanArrayAdapter);
-
-        filterJenis.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //Take data from selected item
-                selectJenis[0] = parent.getSelectedItemPosition();
-                if (selectJenis[0] == 0){
-                    selectedItemJenis[0] = "tidak_ada";
-                    filterBahan.setSelection(0);
-                    filterBahan.setEnabled(false);
-                    filterBahan.setClickable(false);
-                } else {
-                    selectedItemJenis[0] = (String) parent.getItemAtPosition(position);
-                    filterBahan.setEnabled(true);
-                    filterBahan.setClickable(true);
-                }
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-            });
-
-        // -----------Search View Override-----------
-        final SearchView searchEngine = findViewById(R.id.search_engine);
-        searchEngine.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                searchEngine.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                    @Override
-                    public boolean onQueryTextSubmit(String query) {
-                        input[0] = (String) query;
-                        return false;
-                    }
-
-                    @Override
-                    public boolean onQueryTextChange(String newText) {
-                        return false;
-                    }
-                });
-            }
-        });
-
-
-        // -----------Button Override----------------
-        Button tombolCari = findViewById(R.id.tombolcari);
-        tombolCari.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    // Place code here to send intent and data
-                    //data di bawah ini sudah berupa string
-                    //input[0] = 0
-                    //selectedItemJenis[0] = 1
-                    //selectedItemBahan[0] = 2
-                    String sendData[] = {input[0], selectedItemJenis[0], selectedItemBahan[0]};
-
-                    Intent toListContent = new Intent(Mainmenu.this, ListContent.class);
-                    toListContent.putExtra("dataSearch()", sendData);
-
-                    startActivity(toListContent);
-                } catch (Exception e) {
-                    Log.d("Error", "Sending Error");
-                }
-            }
-        });
-
-
-
-
+        carouselView.setImageListener(imageListener);
     }
 
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(gambarSlider[position]);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        }
+    };
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("Apakah Anda yakin ingin keluar?")
+                .setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Mainmenu.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("Tidak", null)
+                .show();
+    }
+
+    private class ContentData extends SQLiteAssetHelper {
+        private TextView txtJudul, txtJenis, txtTempat, txtHarga;
+        private ImageView imgPath;
+        private static final String DATABASE_NAME = "db_cavii_v1.db";
+        private static final int DATABASE_VERSION = 1;
+
+        private ContentData(Context context) {
+            super(context, DATABASE_NAME, null, DATABASE_VERSION);
+            txtJudul = findViewById(R.id.home_content_judul);
+            txtJenis = findViewById(R.id.home_content_jenis);
+            txtHarga = findViewById(R.id.home_content_harga);
+            imgPath = findViewById(R.id.home_content_gambar);
+            txtTempat = findViewById(R.id.home_content_alamat);
+        }
+
+        private void setData(String id) {
+            SQLiteDatabase db = getWritableDatabase();
+            String[] sqlSelect = {"_id", "cav_name", "cav_jen_name", "cav_cost", "cav_pict", "cav_address"};
+
+            String qSelect = "SELECT cavii_trans._id, cavii_konveksi.cav_name, cavii_jenis.cav_jen_name, cavii_trans.cav_cost, cavii_trans.cav_pict, cavii_konveksi.cav_address FROM cavii_trans " +
+                    "INNER JOIN cavii_konveksi ON cavii_trans.cav_id = cavii_konveksi._id " +
+                    "INNER JOIN cavii_jenis ON cavii_trans.cav_jen_id = cavii_jenis._id " +
+                    "INNER JOIN cavii_bahan ON cavii_trans.cav_ba_id = cavii_bahan._id WHERE cavii_trans._id = ? ORDER BY cavii_trans.cav_cost ASC";
+
+            String[] searchParams = new String[]{id};
+
+            Cursor c = db.rawQuery(qSelect, searchParams);
+            c.moveToFirst();
+
+            txtJudul.setText(c.getString(c.getColumnIndex(sqlSelect[1])));
+            txtJenis.setText(c.getString(c.getColumnIndex(sqlSelect[2])));
+            Locale localeID = new Locale("in", "ID");
+            NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(localeID);
+            txtHarga.setText(formatRupiah.format((double)c.getDouble(c.getColumnIndex(sqlSelect[3]))));
+            InputStream stream = this.getClass().getClassLoader().getResourceAsStream("assets/image/" + c.getString(c.getColumnIndex(sqlSelect[4])));
+            Bitmap bitmap = BitmapFactory.decodeStream(stream);
+            imgPath.setImageBitmap(bitmap);
+            txtTempat.setText(c.getString(c.getColumnIndex(sqlSelect[5])));
+            c.close();
+        }
+
+        private int getSize(){
+            SQLiteDatabase db = getWritableDatabase();
+            String qSelect = "SELECT count(_id) FROM cavii_trans";
+
+            Cursor c = db.rawQuery(qSelect,null);
+            c.moveToFirst();
+            int size =  c.getInt(c.getColumnIndex("count(_id)"));
+            c.close();
+            return size;
+        }
+    }
+
+
+    public void menuHome(View view) {
+    }
+
+    public void menuCari(View view) {
+        startActivity(new Intent(Mainmenu.this, ListContent.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+    }
+
+    public void menuFav(View view) {
+        startActivity(new Intent(Mainmenu.this, MenuFav.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
+    }
+
+    public void menuAbout(View view) {
+        startActivity(new Intent(Mainmenu.this, MenuAbout.class));
+        overridePendingTransition(R.anim.no_transition, R.anim.no_transition);
     }
 }
