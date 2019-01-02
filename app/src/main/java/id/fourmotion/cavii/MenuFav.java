@@ -42,7 +42,7 @@ public class MenuFav extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv_content_fav);
         try{
             db = new MyDatabase(MenuFav.this);
-            adapter = new ContentAdapter(db.getSelectFavorite());
+            adapter = new ContentAdapter(this,db.getSelectFavorite());
         }catch (Exception e){
             Toast.makeText(this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
             defaultData();
@@ -57,7 +57,7 @@ public class MenuFav extends AppCompatActivity {
     void defaultData() {
         contentArrayList = new ArrayList<>();
         contentArrayList.add(new Content(null, "", "", "", "", "", "", "", "", "", ""));
-        adapter = new ContentAdapter(contentArrayList);
+        adapter = new ContentAdapter(this,contentArrayList);
     }
 
     @Override
