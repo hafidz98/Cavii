@@ -35,6 +35,7 @@ import id.fourmotion.cavii.R;
 public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentViewHolder> {
 
     private ArrayList<Content> dataList;
+    private MyDatabase db;
 
     public ContentAdapter(ArrayList<Content> dataList) {
         this.dataList = dataList;
@@ -68,10 +69,19 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
         holder.tombol_favorit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MyDatabase db = new MyDatabase(ListContent.getContext());
                 if (holder.tombol_favorit.isSelected()){
                     holder.tombol_favorit.setSelected(false);
+                    try {
+                        Log.d("ID ini","ID nya : " + dataList.get(position).get_id());
+
+                        db.setFav(dataList.get(position).get_id(), "false");
+                    }catch (Exception e){
+                        Log.d("Error Disini", "Ini errornya : " + e);
+                    }
                 }else {
                     holder.tombol_favorit.setSelected(true);
+                    db.setFav(dataList.get(position).get_id(), "true");
                 }
             }
         });
@@ -99,5 +109,4 @@ public class ContentAdapter extends RecyclerView.Adapter<ContentAdapter.ContentV
 
         }
     }
-
 }
