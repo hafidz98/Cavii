@@ -3,4 +3,10 @@
     <string name="splashText">Cavii</string>
     <string name="btnSearchText">CARI</string>
     <string name="stringPanjang">Lorem ipsum dolor sit amet, mei iriure mediocrem qualisque ex, cum te odio ipsum. Vix ex malorum mandamus cotidieque, ius ad nostro accommodare, ad mei zril mediocrem euripidis. Qui id expetenda necessitatibus. Ancillae splendide omittantur ne sit, euismod detracto sapientem vis ut. Ad feugait appareat consequat sea, id tale assum reprimique vim, et congue philosophia vis.</string>
+    <string name="teksAbout">
+        Cavii merupakan sebuah aplikasi mobile android yang di gunakan untuk mencari referensi Konveksi Baju yang adadi Bandar Lampung
+    </string>
+    <string name="anggotaFm">
+        1. Bernad\n2. Deva Dian Ardana\n3. Danil Anju Trisakti\n4. Hafidz
+    </string>
 </resources>
