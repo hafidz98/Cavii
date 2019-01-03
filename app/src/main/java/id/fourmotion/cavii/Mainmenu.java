@@ -47,14 +47,27 @@ public class Mainmenu extends AppCompatActivity {
         ImageButton homeButton = findViewById(R.id.menu_home);
         homeButton.setSelected(true);
 
+
+
         // -----------Final data to send via intent-------
         ContentData contentData = new ContentData(this);
-        contentData.setData(String.valueOf(new Random().nextInt(contentData.getSize()-1) + 1));
+        final int ranID = new Random().nextInt(contentData.getSize()-1) + 1;
+        contentData.setData(String.valueOf(ranID));
 
         carouselView = (CarouselView) findViewById(R.id.carouselViewer);
         carouselView.setPageCount(gambarSlider.length);
 
         carouselView.setImageListener(imageListener);
+
+        ImageView imageView = findViewById(R.id.home_content_gambar);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Mainmenu.this, DetailContent.class);
+                i.putExtra("trans_ID()", String.valueOf(ranID));
+                startActivity(i);
+            }
+        });
     }
 
     ImageListener imageListener = new ImageListener() {
