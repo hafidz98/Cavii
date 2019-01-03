@@ -36,7 +36,7 @@ public class Mainmenu extends AppCompatActivity {
 
     private String id;
     CarouselView carouselView;
-    int[] gambarSlider = {R.drawable.banner, R.drawable.banner};
+    int[] gambarSlider = {R.drawable.banner, R.drawable.banner1, R.drawable.banner2, R.drawable.banner3, R.drawable.banner4};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
