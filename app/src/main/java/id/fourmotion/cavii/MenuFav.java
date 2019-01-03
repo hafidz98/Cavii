@@ -43,15 +43,15 @@ public class MenuFav extends AppCompatActivity {
         try{
             db = new MyDatabase(MenuFav.this);
             adapter = new ContentAdapter(this,db.getSelectFavorite());
+            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
         }catch (Exception e){
-            Toast.makeText(this, "Yah konveksi kamu tidak ditemukan", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Kamu belum punya pakaian favorit", Toast.LENGTH_SHORT).show();
             defaultData();
             db.refreshId();
         }
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
     }
 
     void defaultData() {
